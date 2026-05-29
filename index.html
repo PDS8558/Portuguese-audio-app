@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portuguese GCSE Audio Trainer - Practice listening and speaking skills">
+    <meta name="theme-color" content="#0078d4">
+    <title>Portuguese GCSE Audio Trainer</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icon-192.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🎧 Portuguese GCSE Audio Trainer</h1>
+            <p class="subtitle">Master your listening and speaking skills</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="home">Home</button>
+            <button class="nav-tab" data-tab="listen">Listen & Repeat</button>
+            <button class="nav-tab" data-tab="vocab">Vocabulary</button>
+            <button class="nav-tab" data-tab="grammar">Grammar</button>
+            <button class="nav-tab" data-tab="progress">Progress</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Tab -->
+            <section id="home" class="tab-content active">
+                <div class="welcome-card">
+                    <h2>Welcome to Portuguese GCSE Audio Trainer</h2>
+                    <p>This app helps you prepare for your GCSE Portuguese exam by providing:</p>
+                    <ul class="features-list">
+                        <li>📚 Real GCSE-style listening exercises</li>
+                        <li>🎤 Speaking practice with instant feedback</li>
+                        <li>📖 Vocabulary building with audio pronunciation</li>
+                        <li>✏️ Grammar exercises with explanations</li>
+                        <li>📊 Progress tracking and statistics</li>
+                        <li>🌙 Offline functionality - study anywhere</li>
+                    </ul>
+                </div>
+
+                <div class="quick-start">
+                    <h3>Quick Start</h3>
+                    <div class="button-group">
+                        <button class="btn btn-primary" onclick="switchTab('listen')">
+                            Start Listening Exercise
+                        </button>
+                        <button class="btn btn-secondary" onclick="switchTab('vocab')">
+                            Learn Vocabulary
+                        </button>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>💡 How to Use</h3>
+                    <ol>
+                        <li><strong>Listen & Repeat:</strong> Listen to authentic Portuguese audio and repeat for pronunciation practice</li>
+                        <li><strong>Vocabulary:</strong> Learn themed vocabulary with audio pronunciation guides</li>
+                        <li><strong>Grammar:</strong> Practice grammar rules with interactive exercises</li>
+                        <li><strong>Progress:</strong> Track your learning journey and identify weak areas</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Listen & Repeat Tab -->
+            <section id="listen" class="tab-content">
+                <h2>Listen & Repeat Practice</h2>
+                
+                <div class="category-selector">
+                    <label for="category-select">Select Category:</label>
+                    <select id="category-select" onchange="loadCategory(this.value)">
+                        <option value="">Choose a category...</option>
+                        <option value="greetings">Greetings & Introductions</option>
+                        <option value="daily">Daily Routines</option>
+                        <option value="food">Food & Drinks</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="travel">Travel & Transport</option>
+                        <option value="school">School & Education</option>
+                    </select>
+                </div>
+
+                <div id="listening-content" class="listening-content">
+                    <p class="placeholder">Select a category to begin</p>
+                </div>
+
+                <div class="exercise-card hidden" id="exercise-container">
+                    <div class="exercise-header">
+                        <h3 id="exercise-title"></h3>
+                        <span class="difficulty-badge" id="difficulty"></span>
+                    </div>
+
+                    <div class="audio-player-section">
+                        <p class="portuguese-text" id="portuguese-text"></p>
+                        <div class="audio-controls">
+                            <button class="btn btn-control" id="play-btn" onclick="playAudio()">
+                                🔊 Play Audio
+                            </button>
+                            <button class="btn btn-control" id="slow-btn" onclick="playAudioSlow()">
+                                🐢 Slow Speed
+                            </button>
+                        </div>
+                        <audio id="audio-player"></audio>
+                    </div>
+
+                    <div class="transcription-section">
+                        <button class="btn btn-secondary" id="show-transcription" onclick="toggleTranscription()">
+                            Show Transcription
+                        </button>
+                        <div class="transcription" id="transcription" style="display: none;">
+                            <p><strong>Portuguese:</strong> <span id="trans-portuguese"></span></p>
+                            <p><strong>English:</strong> <span id="trans-english"></span></p>
+                        </div>
+                    </div>
+
+                    <div class="speaking-practice">
+                        <h4>🎤 Speaking Practice</h4>
+                        <p>Record yourself repeating the phrase</p>
+                        <div class="recording-controls">
+                            <button class="btn btn-control" id="record-btn" onclick="startRecording()">
+                                🔴 Start Recording
+                            </button>
+                            <button class="btn btn-control" id="stop-btn" onclick="stopRecording()" disabled>
+                                ⏹️ Stop Recording
+                            </button>
+                        </div>
+                        <audio id="recording-playback" style="margin-top: 10px;" controls></audio>
+                        <div id="recording-feedback" class="feedback"></div>
+                    </div>
+
+                    <div class="navigation-buttons">
+                        <button class="btn btn-secondary" id="prev-btn" onclick="previousExercise()">
+                            ← Previous
+                        </button>
+                        <span class="progress-indicator" id="progress"></span>
+                        <button class="btn btn-secondary" id="next-btn" onclick="nextExercise()">
+                            Next →
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vocabulary Tab -->
+            <section id="vocab" class="tab-content">
+                <h2>Vocabulary Practice</h2>
+
+                <div class="category-selector">
+                    <label for="vocab-category">Select Theme:</label>
+                    <select id="vocab-category" onchange="loadVocabularyTheme(this.value)">
+                        <option value="">Choose a theme...</option>
+                        <option value="numbers">Numbers & Counting</option>
+                        <option value="colors">Colors & Descriptions</option>
+                        <option value="family">Family & Relations</option>
+                        <option value="animals">Animals</option>
+                        <option value="clothes">Clothes & Fashion</option>
+                        <option value="sports">Sports & Hobbies</option>
+                    </select>
+                </div>
+
+                <div id="vocab-content" class="vocab-grid">
+                    <p class="placeholder">Select a theme to start learning</p>
+                </div>
+            </section>
+
+            <!-- Grammar Tab -->
+            <section id="grammar" class="tab-content">
+                <h2>Grammar Practice</h2>
+
+                <div class="category-selector">
+                    <label for="grammar-category">Select Topic:</label>
+                    <select id="grammar-category" onchange="loadGrammarTopic(this.value)">
+                        <option value="">Choose a topic...</option>
+                        <option value="present">Present Tense</option>
+                        <option value="past">Past Tense</option>
+                        <option value="future">Future Tense</option>
+                        <option value="adjectives">Adjectives & Agreement</option>
+                        <option value="pronouns">Pronouns</option>
+                        <option value="prepositions">Prepositions</option>
+                    </select>
+                </div>
+
+                <div id="grammar-content" class="grammar-exercises">
+                    <p class="placeholder">Select a topic to practice</p>
+                </div>
+            </section>
+
+            <!-- Progress Tab -->
+            <section id="progress" class="tab-content">
+                <h2>Your Progress</h2>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Exercises</h3>
+                        <p class="stat-number" id="stat-total">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Completed</h3>
+                        <p class="stat-number" id="stat-completed">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Accuracy</h3>
+                        <p class="stat-number" id="stat-accuracy">0%</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Current Streak</h3>
+                        <p class="stat-number" id="stat-streak">0</p>
+                    </div>
+                </div>
+
+                <div class="progress-section">
+                    <h3>Category Performance</h3>
+                    <div id="category-progress" class="category-progress-list">
+                        <p class="placeholder">Complete exercises to see your progress</p>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="resetProgress()">
+                        Reset Progress
+                    </button>
+                    <button class="btn btn-secondary" onclick="exportProgress()">
+                        Export Results
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Portuguese GCSE Audio Trainer © 2026 | <a href="#" onclick="showAbout()">About</a> | <a href="#" onclick="showSettings()">Settings</a></p>
+        </footer>
+    </div>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed:', err));
+        }
+    </script>
+
+    <script src="app.js"></script>
+</body>
+</html>
