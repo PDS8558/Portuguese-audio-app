@@ -122,11 +122,6 @@
             padding: 1.5rem;
             margin-bottom: 1.5rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .btn {
@@ -191,7 +186,7 @@
             color: var(--text-dark);
         }
 
-        select, input[type="text"], input[type="number"] {
+        select {
             width: 100%;
             padding: 0.75rem;
             border: 2px solid var(--border-color);
@@ -199,10 +194,9 @@
             font-size: 1rem;
             font-family: inherit;
             margin-bottom: 1rem;
-            transition: border-color 0.3s ease;
         }
 
-        select:focus, input[type="text"]:focus, input[type="number"]:focus {
+        select:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.1);
@@ -232,200 +226,24 @@
             margin-right: 0.5rem;
         }
 
-        .exercise-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 1rem;
-        }
-
-        .exercise-header h3 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-
-        .difficulty-badge {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .difficulty-badge.beginner {
-            background-color: #d4edda;
-            color: #155724;
-        }
-
-        .difficulty-badge.intermediate {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-
-        .difficulty-badge.advanced {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-
-        .portuguese-text {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            font-weight: 600;
-            padding: 1rem;
-            background-color: var(--light-bg);
-            border-radius: 6px;
-            margin: 1rem 0;
-            text-align: center;
-            font-style: italic;
-        }
-
-        .audio-player-section,
-        .transcription-section,
-        .speaking-practice {
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background-color: var(--light-bg);
-            border-radius: 6px;
-        }
-
-        .audio-controls,
-        .recording-controls {
-            display: flex;
-            gap: 1rem;
-            margin: 1rem 0;
-            flex-wrap: wrap;
-        }
-
-        .transcription {
-            background: white;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-top: 1rem;
-            border-left: 4px solid var(--primary-color);
-        }
-
-        .transcription p {
-            margin: 0.5rem 0;
-        }
-
-        .transcription strong {
-            color: var(--primary-color);
-        }
-
-        .speaking-practice h4 {
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-        }
-
-        .speaking-practice p {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-
-        #recording-playback {
-            width: 100%;
-            margin-top: 1rem;
-        }
-
-        .feedback {
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 6px;
-            display: none;
-        }
-
-        .feedback.success {
-            display: block;
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .feedback.error {
-            display: block;
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .navigation-buttons {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 2rem;
-            gap: 1rem;
-        }
-
-        .progress-indicator {
-            font-weight: 600;
-            color: var(--primary-color);
-            font-size: 1.1rem;
-        }
-
-        .vocab-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .vocab-card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .grammar-option-btn {
+            padding: 0.75rem;
+            background: var(--light-bg);
             border: 2px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
-        .vocab-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        .grammar-option-btn:hover {
             border-color: var(--primary-color);
         }
 
-        .vocab-word {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .vocab-translation {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 120, 212, 0.2);
-        }
-
-        .stat-card h3 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            opacity: 0.95;
-            margin-bottom: 0.75rem;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
+        .grammar-option-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
 
         .footer {
@@ -435,16 +253,6 @@
             text-align: center;
             color: var(--text-light);
             margin-top: auto;
-        }
-
-        .footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-            margin: 0 1rem;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
         }
 
         .placeholder {
@@ -458,25 +266,30 @@
             display: none !important;
         }
 
-        .exercise-card {
-            border-left: 4px solid var(--primary-color);
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--light-bg);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0.5rem 0;
         }
 
-        .welcome-card {
-            text-align: center;
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
         }
 
-        .quick-start {
-            text-align: center;
+        .question-number {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
         }
 
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8rem;
-            }
-
-            .nav-tabs {
-                justify-content: flex-start;
             }
 
             .main-content {
@@ -486,68 +299,6 @@
             .card {
                 padding: 1rem;
                 margin-bottom: 1rem;
-            }
-
-            .vocab-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 1rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.95rem;
-            }
-
-            .audio-controls,
-            .recording-controls {
-                flex-direction: column;
-            }
-
-            .audio-controls button,
-            .recording-controls button {
-                width: 100%;
-            }
-
-            .navigation-buttons {
-                flex-direction: column;
-            }
-
-            .navigation-buttons button {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 1.4rem;
-            }
-
-            .header .subtitle {
-                font-size: 0.95rem;
-            }
-
-            .portuguese-text {
-                font-size: 1.2rem;
-            }
-
-            .stat-number {
-                font-size: 2rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .btn-group {
-                flex-direction: column;
-            }
-
-            .btn-group button {
-                width: 100%;
             }
         }
 
@@ -569,174 +320,53 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <header class="header">
             <h1>🎧 Portuguese GCSE Audio Trainer</h1>
             <p class="subtitle">Master your listening and speaking skills</p>
         </header>
 
-        <!-- Navigation -->
         <nav class="nav-tabs">
             <button class="nav-tab active" data-tab="home">Home</button>
-            <button class="nav-tab" data-tab="listen">Listen & Repeat</button>
-            <button class="nav-tab" data-tab="vocab">Vocabulary</button>
             <button class="nav-tab" data-tab="grammar">Grammar</button>
             <button class="nav-tab" data-tab="progress">Progress</button>
         </nav>
 
-        <!-- Main Content -->
         <main class="main-content">
-            <!-- Home Tab -->
             <section id="home" class="tab-content active">
-                <div class="card welcome-card">
+                <div class="card">
                     <h2>Welcome to Portuguese GCSE Audio Trainer</h2>
                     <p>This app helps you prepare for your GCSE Portuguese exam by providing:</p>
                     <ul class="features-list">
-                        <li>📚 Real GCSE-style listening exercises</li>
-                        <li>🎤 Speaking practice with instant feedback</li>
-                        <li>📖 Vocabulary building with audio pronunciation</li>
-                        <li>✏️ Grammar exercises with explanations</li>
+                        <li>✏️ 10 Grammar exercises per topic</li>
                         <li>📊 Progress tracking and statistics</li>
+                        <li>🎯 Instant feedback and explanations</li>
                         <li>🌙 Offline functionality - study anywhere</li>
                     </ul>
                 </div>
 
-                <div class="card quick-start">
+                <div class="card">
                     <h3>Quick Start</h3>
                     <div class="btn-group">
-                        <button class="btn btn-primary" onclick="switchTab('listen')">
-                            Start Listening Exercise
-                        </button>
-                        <button class="btn btn-secondary" onclick="switchTab('vocab')">
-                            Learn Vocabulary
-                        </button>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>💡 How to Use</h3>
-                    <ol>
-                        <li><strong>Listen & Repeat:</strong> Listen to authentic Portuguese audio and repeat for pronunciation practice</li>
-                        <li><strong>Vocabulary:</strong> Learn themed vocabulary with audio pronunciation guides</li>
-                        <li><strong>Grammar:</strong> Practice grammar rules with interactive exercises</li>
-                        <li><strong>Progress:</strong> Track your learning journey and identify weak areas</li>
-                    </ol>
-                </div>
-            </section>
-
-            <!-- Listen & Repeat Tab -->
-            <section id="listen" class="tab-content">
-                <h2>Listen & Repeat Practice</h2>
-                
-                <div class="category-selector">
-                    <label for="category-select">Select Category:</label>
-                    <select id="category-select" onchange="loadCategory(this.value)">
-                        <option value="">Choose a category...</option>
-                        <option value="greetings">Greetings & Introductions</option>
-                        <option value="daily">Daily Routines</option>
-                        <option value="food">Food & Drinks</option>
-                        <option value="shopping">Shopping</option>
-                        <option value="travel">Travel & Transport</option>
-                        <option value="school">School & Education</option>
-                    </select>
-                </div>
-
-                <div id="listening-content" class="listening-content">
-                    <p class="placeholder">Select a category to begin</p>
-                </div>
-
-                <div class="exercise-card hidden" id="exercise-container">
-                    <div class="exercise-header">
-                        <h3 id="exercise-title"></h3>
-                        <span class="difficulty-badge" id="difficulty"></span>
-                    </div>
-
-                    <div class="audio-player-section">
-                        <p class="portuguese-text" id="portuguese-text"></p>
-                        <div class="audio-controls">
-                            <button class="btn btn-control" id="play-btn" onclick="playAudio()">
-                                🔊 Play Audio
-                            </button>
-                            <button class="btn btn-control" id="slow-btn" onclick="playAudioSlow()">
-                                🐢 Slow Speed
-                            </button>
-                        </div>
-                        <audio id="audio-player"></audio>
-                    </div>
-
-                    <div class="transcription-section">
-                        <button class="btn btn-secondary" id="show-transcription" onclick="toggleTranscription()">
-                            Show Transcription
-                        </button>
-                        <div class="transcription" id="transcription" style="display: none;">
-                            <p><strong>Portuguese:</strong> <span id="trans-portuguese"></span></p>
-                            <p><strong>English:</strong> <span id="trans-english"></span></p>
-                        </div>
-                    </div>
-
-                    <div class="speaking-practice">
-                        <h4>🎤 Speaking Practice</h4>
-                        <p>Record yourself repeating the phrase</p>
-                        <div class="recording-controls">
-                            <button class="btn btn-control" id="record-btn" onclick="startRecording()">
-                                🔴 Start Recording
-                            </button>
-                            <button class="btn btn-control" id="stop-btn" onclick="stopRecording()" disabled>
-                                ⏹️ Stop Recording
-                            </button>
-                        </div>
-                        <audio id="recording-playback" controls></audio>
-                        <div id="recording-feedback" class="feedback"></div>
-                    </div>
-
-                    <div class="navigation-buttons">
-                        <button class="btn btn-secondary" id="prev-btn" onclick="previousExercise()">
-                            ← Previous
-                        </button>
-                        <span class="progress-indicator" id="progress"></span>
-                        <button class="btn btn-secondary" id="next-btn" onclick="nextExercise()">
-                            Next →
+                        <button class="btn btn-primary" onclick="switchTab('grammar')">
+                            Start Grammar Practice
                         </button>
                     </div>
                 </div>
             </section>
 
-            <!-- Vocabulary Tab -->
-            <section id="vocab" class="tab-content">
-                <h2>Vocabulary Practice</h2>
-
-                <div class="category-selector">
-                    <label for="vocab-category">Select Theme:</label>
-                    <select id="vocab-category" onchange="loadVocabularyTheme(this.value)">
-                        <option value="">Choose a theme...</option>
-                        <option value="numbers">Numbers & Counting</option>
-                        <option value="colors">Colors & Descriptions</option>
-                        <option value="family">Family & Relations</option>
-                        <option value="animals">Animals</option>
-                        <option value="clothes">Clothes & Fashion</option>
-                        <option value="sports">Sports & Hobbies</option>
-                    </select>
-                </div>
-
-                <div id="vocab-content" class="vocab-grid">
-                    <p class="placeholder">Select a theme to start learning</p>
-                </div>
-            </section>
-
-            <!-- Grammar Tab -->
             <section id="grammar" class="tab-content">
                 <h2>Grammar Practice</h2>
-
+                
                 <div class="category-selector">
                     <label for="grammar-category">Select Topic:</label>
                     <select id="grammar-category" onchange="loadGrammarTopic(this.value)">
                         <option value="">Choose a topic...</option>
-                        <option value="present">Present Tense</option>
-                        <option value="past">Past Tense</option>
-                        <option value="future">Future Tense</option>
-                        <option value="adjectives">Adjectives & Agreement</option>
-                        <option value="pronouns">Pronouns</option>
-                        <option value="prepositions">Prepositions</option>
+                        <option value="present">Present Tense (10 exercises)</option>
+                        <option value="past">Past Tense (10 exercises)</option>
+                        <option value="future">Future Tense (10 exercises)</option>
+                        <option value="adjectives">Adjectives & Agreement (10 exercises)</option>
+                        <option value="pronouns">Pronouns (10 exercises)</option>
+                        <option value="prepositions">Prepositions (10 exercises)</option>
                     </select>
                 </div>
 
@@ -745,184 +375,23 @@
                 </div>
             </section>
 
-            <!-- Progress Tab -->
             <section id="progress" class="tab-content">
                 <h2>Your Progress</h2>
-
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <h3>Total Exercises</h3>
-                        <p class="stat-number" id="stat-total">0</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Completed</h3>
-                        <p class="stat-number" id="stat-completed">0</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Accuracy</h3>
-                        <p class="stat-number" id="stat-accuracy">0%</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Current Streak</h3>
-                        <p class="stat-number" id="stat-streak">0</p>
-                    </div>
-                </div>
-
                 <div class="card">
-                    <h3>Category Performance</h3>
-                    <div id="category-progress" class="category-progress-list">
+                    <h3>Topic Performance</h3>
+                    <div id="progress-content">
                         <p class="placeholder">Complete exercises to see your progress</p>
                     </div>
-                </div>
-
-                <div class="btn-group">
-                    <button class="btn btn-secondary" onclick="resetProgress()">
-                        Reset Progress
-                    </button>
-                    <button class="btn btn-secondary" onclick="exportProgress()">
-                        Export Results
-                    </button>
                 </div>
             </section>
         </main>
 
-        <!-- Footer -->
         <footer class="footer">
             <p>Portuguese GCSE Audio Trainer © 2026</p>
         </footer>
     </div>
 
     <script>
-        let currentCategory = null;
-        let currentExerciseIndex = 0;
-        let recordingMediaRecorder = null;
-        let recordingChunks = [];
-        let userProgress = JSON.parse(localStorage.getItem('userProgress')) || {};
-
-        const exerciseData = {
-            greetings: [
-                {
-                    id: 1,
-                    portuguese: "Olá, como está?",
-                    english: "Hello, how are you?",
-                    difficulty: "beginner"
-                },
-                {
-                    id: 2,
-                    portuguese: "Meu nome é João.",
-                    english: "My name is John.",
-                    difficulty: "beginner"
-                },
-                {
-                    id: 3,
-                    portuguese: "Muito prazer em conhecê-lo.",
-                    english: "Nice to meet you.",
-                    difficulty: "beginner"
-                }
-            ],
-            daily: [
-                {
-                    id: 1,
-                    portuguese: "Eu acordo às sete da manhã.",
-                    english: "I wake up at seven in the morning.",
-                    difficulty: "intermediate"
-                },
-                {
-                    id: 2,
-                    portuguese: "Tomo meu café da manhã.",
-                    english: "I have my breakfast.",
-                    difficulty: "intermediate"
-                }
-            ],
-            food: [
-                {
-                    id: 1,
-                    portuguese: "Quero uma cerveja e uma pizza.",
-                    english: "I want a beer and a pizza.",
-                    difficulty: "beginner"
-                },
-                {
-                    id: 2,
-                    portuguese: "A comida é deliciosa.",
-                    english: "The food is delicious.",
-                    difficulty: "beginner"
-                }
-            ],
-            shopping: [
-                {
-                    id: 1,
-                    portuguese: "Quanto custa?",
-                    english: "How much does it cost?",
-                    difficulty: "beginner"
-                }
-            ],
-            travel: [
-                {
-                    id: 1,
-                    portuguese: "Onde fica a estação de comboios?",
-                    english: "Where is the train station?",
-                    difficulty: "intermediate"
-                }
-            ],
-            school: [
-                {
-                    id: 1,
-                    portuguese: "Qual é a sua matéria favorita?",
-                    english: "What is your favorite subject?",
-                    difficulty: "intermediate"
-                }
-            ]
-        };
-
-        const vocabularyThemes = {
-            numbers: [
-                { word: "um", translation: "one" },
-                { word: "dois", translation: "two" },
-                { word: "três", translation: "three" },
-                { word: "quatro", translation: "four" },
-                { word: "cinco", translation: "five" },
-                { word: "dez", translation: "ten" },
-                { word: "vinte", translation: "twenty" },
-                { word: "cem", translation: "one hundred" }
-            ],
-            colors: [
-                { word: "vermelho", translation: "red" },
-                { word: "azul", translation: "blue" },
-                { word: "verde", translation: "green" },
-                { word: "amarelo", translation: "yellow" },
-                { word: "preto", translation: "black" },
-                { word: "branco", translation: "white" },
-                { word: "rosa", translation: "pink" }
-            ],
-            family: [
-                { word: "pai", translation: "father" },
-                { word: "mãe", translation: "mother" },
-                { word: "filho", translation: "son" },
-                { word: "filha", translation: "daughter" },
-                { word: "irmão", translation: "brother" },
-                { word: "irmã", translation: "sister" },
-                { word: "avó", translation: "grandmother" }
-            ],
-            animals: [
-                { word: "gato", translation: "cat" },
-                { word: "cão", translation: "dog" },
-                { word: "pássaro", translation: "bird" },
-                { word: "peixe", translation: "fish" }
-            ],
-            clothes: [
-                { word: "camisa", translation: "shirt" },
-                { word: "calça", translation: "pants" },
-                { word: "vestido", translation: "dress" },
-                { word: "sapato", translation: "shoe" }
-            ],
-            sports: [
-                { word: "futebol", translation: "football/soccer" },
-                { word: "natação", translation: "swimming" },
-                { word: "ténis", translation: "tennis" },
-                { word: "basquetebol", translation: "basketball" }
-            ]
-        };
-
         const grammarTopics = {
             present: [
                 {
@@ -936,6 +405,54 @@
                     options: ["moro", "mora", "moram", "moramos"],
                     correct: 1,
                     explanation: "Third person singular: 'ele mora' (he lives)"
+                },
+                {
+                    question: "Choose the correct form: 'Nós _____ na escola.'",
+                    options: ["trabalho", "trabalha", "trabalham", "trabalhamos"],
+                    correct: 3,
+                    explanation: "First person plural: 'nós trabalhamos' (we work)"
+                },
+                {
+                    question: "Choose the correct form: 'Ela _____ um livro.'",
+                    options: ["leio", "lê", "leem", "lemos"],
+                    correct: 1,
+                    explanation: "Third person singular: 'ela lê' (she reads)"
+                },
+                {
+                    question: "Choose the correct form: 'Eles _____ pizza.'",
+                    options: ["como", "come", "comemos", "comem"],
+                    correct: 3,
+                    explanation: "Third person plural: 'eles comem' (they eat)"
+                },
+                {
+                    question: "Choose the correct form: 'Você _____ inglês?'",
+                    options: ["falo", "falas", "fala", "falamos"],
+                    correct: 2,
+                    explanation: "Second person formal: 'você fala' (you speak)"
+                },
+                {
+                    question: "Choose the correct form: 'Tu _____ aqui.'",
+                    options: ["moro", "moras", "mora", "moram"],
+                    correct: 1,
+                    explanation: "Second person informal: 'tu moras' (you live)"
+                },
+                {
+                    question: "Choose the correct form: 'Eu _____ a porta.'",
+                    options: ["abro", "abres", "abre", "abrem"],
+                    correct: 0,
+                    explanation: "First person singular: 'eu abro' (I open)"
+                },
+                {
+                    question: "Choose the correct form: 'Elas _____ felizes.'",
+                    options: ["sou", "é", "somos", "são"],
+                    correct: 3,
+                    explanation: "Third person plural of 'ser': 'elas são' (they are)"
+                },
+                {
+                    question: "Choose the correct form: 'Nós _____ no cinema.'",
+                    options: ["vou", "vai", "vamos", "vão"],
+                    correct: 2,
+                    explanation: "First person plural: 'nós vamos' (we go)"
                 }
             ],
             past: [
@@ -944,14 +461,122 @@
                     options: ["jogo", "joguei", "jogava", "jogarei"],
                     correct: 1,
                     explanation: "Preterite: 'joguei' (I played)"
+                },
+                {
+                    question: "Choose the correct past tense: 'Ele _____ um carro novo.'",
+                    options: ["compra", "comprou", "compraria", "comprará"],
+                    correct: 1,
+                    explanation: "Preterite: 'comprou' (he bought)"
+                },
+                {
+                    question: "Choose the correct past tense: 'Eles _____ para casa.'",
+                    options: ["vão", "foram", "vão", "irão"],
+                    correct: 1,
+                    explanation: "Preterite: 'foram' (they went)"
+                },
+                {
+                    question: "Choose the correct past tense: 'Ela _____ o filme.'",
+                    options: ["assiste", "assistiu", "assistirá", "assistia"],
+                    correct: 1,
+                    explanation: "Preterite: 'assistiu' (she watched)"
+                },
+                {
+                    question: "Choose the correct past tense: 'Nós _____ a festa.'",
+                    options: ["adoramos", "adorámos", "adorávamos", "adoraremos"],
+                    correct: 0,
+                    explanation: "Preterite: 'adoramos' (we loved)"
+                },
+                {
+                    question: "Choose the correct past tense: 'Você _____ à praia?'",
+                    options: ["vai", "foi", "irá", "iria"],
+                    correct: 1,
+                    explanation: "Preterite: 'foi' (you went)"
+                },
+                {
+                    question: "Choose the correct past tense: 'Eu _____ em Lisboa.'",
+                    options: ["viva", "vivia", "vivi", "viverei"],
+                    correct: 2,
+                    explanation: "Preterite: 'vivi' (I lived)"
+                },
+                {
+                    question: "Choose the correct past tense: 'Elas _____ as lições.'",
+                    options: ["aprendem", "aprenderam", "aprendia", "aprenderão"],
+                    correct: 1,
+                    explanation: "Preterite: 'aprenderam' (they learned)"
+                },
+                {
+                    question: "Choose the correct past tense: 'Eu _____ muito cansado.'",
+                    options: ["sou", "fui", "era", "seria"],
+                    correct: 2,
+                    explanation: "Imperfect: 'era' (I was/used to be)"
+                },
+                {
+                    question: "Choose the correct past tense: 'Ele _____ lá quando a conheceu.'",
+                    options: ["trabalha", "trabalhou", "trabalhava", "trabalhará"],
+                    correct: 2,
+                    explanation: "Imperfect: 'trabalhava' (he used to work)"
                 }
             ],
             future: [
                 {
                     question: "Choose the correct future tense: 'Eu _____ amanhã.'",
-                    options: ["vou", "vou ir", "irei", "vou"],
+                    options: ["vou", "vou ir", "irei", "ia"],
                     correct: 2,
                     explanation: "Future: 'irei' (I will go)"
+                },
+                {
+                    question: "Choose the correct future tense: 'Ela _____ na universidade.'",
+                    options: ["estuda", "estudará", "estudava", "estudou"],
+                    correct: 1,
+                    explanation: "Future: 'estudará' (she will study)"
+                },
+                {
+                    question: "Choose the correct future tense: 'Nós _____ juntos.'",
+                    options: ["viajaremos", "viajamos", "viajávamos", "viajámos"],
+                    correct: 0,
+                    explanation: "Future: 'viajaremos' (we will travel)"
+                },
+                {
+                    question: "Choose the correct future tense: 'Eles _____ a competição.'",
+                    options: ["ganham", "ganharam", "ganharão", "ganhava"],
+                    correct: 2,
+                    explanation: "Future: 'ganharão' (they will win)"
+                },
+                {
+                    question: "Choose the correct future tense: 'Você _____ sucesso.'",
+                    options: ["terá", "tem", "tinha", "teve"],
+                    correct: 0,
+                    explanation: "Future: 'terá' (you will have)"
+                },
+                {
+                    question: "Choose the correct future tense: 'Eu _____ uma casa grande.'",
+                    options: ["compro", "compraria", "comprarei", "comprei"],
+                    correct: 2,
+                    explanation: "Future: 'comprarei' (I will buy)"
+                },
+                {
+                    question: "Choose the correct future tense: 'Ela _____ o trabalho em tempo.'",
+                    options: ["termina", "terminou", "terminará", "terminava"],
+                    correct: 2,
+                    explanation: "Future: 'terminará' (she will finish)"
+                },
+                {
+                    question: "Choose the correct future tense: 'Elas _____ ao encontro.'",
+                    options: ["vão", "irão", "foram", "iam"],
+                    correct: 1,
+                    explanation: "Future: 'irão' (they will go)"
+                },
+                {
+                    question: "Choose the correct future tense: 'Nós _____ felizes.'",
+                    options: ["seremos", "somos", "éramos", "fomos"],
+                    correct: 0,
+                    explanation: "Future: 'seremos' (we will be)"
+                },
+                {
+                    question: "Choose the correct future tense: 'Ele _____ para Portugal.'",
+                    options: ["volta", "voltaria", "voltará", "voltava"],
+                    correct: 2,
+                    explanation: "Future: 'voltará' (he will return)"
                 }
             ],
             adjectives: [
@@ -960,6 +585,60 @@
                     options: ["grande", "grandes", "gran", "grando"],
                     correct: 0,
                     explanation: "Feminine singular: 'grande' (big)"
+                },
+                {
+                    question: "Choose the correct adjective: 'Os livros são _____.'",
+                    options: ["interessante", "interessante", "interessantes", "interessanto"],
+                    correct: 2,
+                    explanation: "Masculine plural: 'interessantes' (interesting)"
+                },
+                {
+                    question: "Choose the correct adjective: 'A menina é _____.'",
+                    options: ["bonito", "bonita", "bonito", "bonitó"],
+                    correct: 1,
+                    explanation: "Feminine singular: 'bonita' (pretty)"
+                },
+                {
+                    question: "Choose the correct adjective: 'Os carros são _____.'",
+                    options: ["novo", "novos", "nova", "novas"],
+                    correct: 1,
+                    explanation: "Masculine plural: 'novos' (new)"
+                },
+                {
+                    question: "Choose the correct adjective: 'As meninas são _____.'",
+                    options: ["inteligente", "inteligente", "inteligentes", "inteliganto"],
+                    correct: 2,
+                    explanation: "Feminine plural: 'inteligentes' (intelligent)"
+                },
+                {
+                    question: "Choose the correct adjective: 'O professor é _____.'",
+                    options: ["estrito", "estrita", "estritos", "estritas"],
+                    correct: 0,
+                    explanation: "Masculine singular: 'estrito' (strict)"
+                },
+                {
+                    question: "Choose the correct adjective: 'A aula é _____.'",
+                    options: ["difícil", "difícilo", "difícila", "difíciles"],
+                    correct: 0,
+                    explanation: "Feminine singular: 'difícil' (difficult)"
+                },
+                {
+                    question: "Choose the correct adjective: 'Os alunos são _____.'",
+                    options: ["divertido", "divertida", "divertidos", "divertidas"],
+                    correct: 2,
+                    explanation: "Masculine plural: 'divertidos' (fun)"
+                },
+                {
+                    question: "Choose the correct adjective: 'A resposta é _____.'",
+                    options: ["correto", "correta", "corretos", "corretas"],
+                    correct: 1,
+                    explanation: "Feminine singular: 'correta' (correct)"
+                },
+                {
+                    question: "Choose the correct adjective: 'As comidas são _____.'",
+                    options: ["delicioso", "deliciosa", "deliciosos", "deliciosas"],
+                    correct: 3,
+                    explanation: "Feminine plural: 'deliciosas' (delicious)"
                 }
             ],
             pronouns: [
@@ -968,6 +647,60 @@
                     options: ["Ele", "Nós", "Elas", "Você"],
                     correct: 1,
                     explanation: "First person plural: 'Nós' (We)"
+                },
+                {
+                    question: "Choose the correct pronoun: '_____ é professor.'",
+                    options: ["Eles", "Ela", "Nós", "Eu"],
+                    correct: 1,
+                    explanation: "Third person feminine: 'Ela' (She)"
+                },
+                {
+                    question: "Choose the correct pronoun: '_____ estou feliz.'",
+                    options: ["Tu", "Eu", "Ele", "Você"],
+                    correct: 1,
+                    explanation: "First person singular: 'Eu' (I)"
+                },
+                {
+                    question: "Choose the correct pronoun: '_____ vão à praia.'",
+                    options: ["Ele", "Eu", "Eles", "Tu"],
+                    correct: 2,
+                    explanation: "Third person plural: 'Eles' (They)"
+                },
+                {
+                    question: "Choose the correct pronoun: '_____ falam português?'",
+                    options: ["Vocês", "Nós", "Ele", "Eu"],
+                    correct: 0,
+                    explanation: "Second person plural: 'Vocês' (You all)"
+                },
+                {
+                    question: "Choose the correct pronoun: '_____ comes maçã.'",
+                    options: ["Tu", "Ele", "Nós", "Eles"],
+                    correct: 0,
+                    explanation: "Second person informal: 'Tu' (You informal)"
+                },
+                {
+                    question: "Choose the correct pronoun: '_____ mora em Lisboa.'",
+                    options: ["Vocês", "Eu", "Você", "Eles"],
+                    correct: 2,
+                    explanation: "Second person formal: 'Você' (You formal)"
+                },
+                {
+                    question: "Choose the correct pronoun: '_____ trabalham na fábrica.'",
+                    options: ["Eu", "Tu", "Elas", "Você"],
+                    correct: 2,
+                    explanation: "Third person plural feminine: 'Elas' (They-f)"
+                },
+                {
+                    question: "Choose the correct pronoun: '_____ comemos juntos.'",
+                    options: ["Nós", "Você", "Eles", "Eu"],
+                    correct: 0,
+                    explanation: "First person plural: 'Nós' (We)"
+                },
+                {
+                    question: "Choose the correct pronoun: '_____ é muito alto.'",
+                    options: ["Tu", "Ele", "Nós", "Vocês"],
+                    correct: 1,
+                    explanation: "Third person masculine: 'Ele' (He)"
                 }
             ],
             prepositions: [
@@ -976,9 +709,66 @@
                     options: ["em", "de", "para", "com"],
                     correct: 0,
                     explanation: "Location: 'em' (in/on)"
+                },
+                {
+                    question: "Choose the correct preposition: 'Eu vou _____ Lisboa.'",
+                    options: ["em", "de", "para", "com"],
+                    correct: 2,
+                    explanation: "Destination: 'para' (to)"
+                },
+                {
+                    question: "Choose the correct preposition: 'Este carro é _____ João.'",
+                    options: ["em", "de", "para", "com"],
+                    correct: 1,
+                    explanation: "Possession: 'de' (of)"
+                },
+                {
+                    question: "Choose the correct preposition: 'Ela fala _____ seu amigo.'",
+                    options: ["em", "de", "para", "com"],
+                    correct: 3,
+                    explanation: "Accompaniment: 'com' (with)"
+                },
+                {
+                    question: "Choose the correct preposition: 'Eles moram _____ Portugal.'",
+                    options: ["em", "de", "para", "a"],
+                    correct: 0,
+                    explanation: "Location: 'em' (in)"
+                },
+                {
+                    question: "Choose the correct preposition: 'Este presente é _____ você.'",
+                    options: ["em", "de", "para", "com"],
+                    correct: 2,
+                    explanation: "Destination/Recipient: 'para' (for)"
+                },
+                {
+                    question: "Choose the correct preposition: 'A senha _____ o banco é 1234.'",
+                    options: ["em", "de", "para", "com"],
+                    correct: 1,
+                    explanation: "Possession: 'de' (of)"
+                },
+                {
+                    question: "Choose the correct preposition: 'Ele trabalha _____ a empresa.'",
+                    options: ["em", "de", "para", "com"],
+                    correct: 0,
+                    explanation: "Location: 'em' (in)"
+                },
+                {
+                    question: "Choose the correct preposition: 'Vou ficar _____ casa esta noite.'",
+                    options: ["em", "de", "a", "com"],
+                    correct: 0,
+                    explanation: "Location: 'em' (at)"
+                },
+                {
+                    question: "Choose the correct preposition: 'Ele veio _____ carro.'",
+                    options: ["em", "de", "para", "com"],
+                    correct: 0,
+                    explanation: "Transportation: 'em' (by)"
                 }
             ]
         };
+
+        let currentTopic = null;
+        let answeredQuestions = {};
 
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => {
@@ -990,175 +780,15 @@
             });
 
             document.getElementById(tabName).classList.add('active');
-            
             document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-        }
-
-        document.querySelectorAll('.nav-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                switchTab(this.dataset.tab);
-            });
-        });
-
-        function loadCategory(category) {
-            if (!category) return;
-            
-            currentCategory = category;
-            currentExerciseIndex = 0;
-            
-            const exercises = exerciseData[category] || [];
-            
-            if (exercises.length === 0) {
-                document.getElementById('listening-content').innerHTML = '<p class="placeholder">No exercises available for this category.</p>';
-                return;
-            }
-
-            document.getElementById('exercise-container').classList.remove('hidden');
-            loadExercise(0);
-        }
-
-        function loadExercise(index) {
-            const exercises = exerciseData[currentCategory];
-            
-            if (index < 0 || index >= exercises.length) {
-                return;
-            }
-
-            currentExerciseIndex = index;
-            const exercise = exercises[index];
-
-            document.getElementById('exercise-title').textContent = `Exercise ${index + 1}: ${exercise.english}`;
-            document.getElementById('difficulty').textContent = exercise.difficulty.charAt(0).toUpperCase() + exercise.difficulty.slice(1);
-            document.getElementById('difficulty').className = `difficulty-badge ${exercise.difficulty}`;
-            document.getElementById('portuguese-text').textContent = exercise.portuguese;
-            
-            document.getElementById('trans-portuguese').textContent = exercise.portuguese;
-            document.getElementById('trans-english').textContent = exercise.english;
-
-            document.getElementById('progress').textContent = `${index + 1} / ${exercises.length}`;
-
-            document.getElementById('prev-btn').disabled = index === 0;
-            document.getElementById('next-btn').disabled = index === exercises.length - 1;
-
-            document.getElementById('transcription').style.display = 'none';
-            document.getElementById('show-transcription').textContent = 'Show Transcription';
-
-            // Speak the Portuguese text
-            speakPortuguese(exercise.portuguese);
-        }
-
-        function speakPortuguese(text) {
-            if ('speechSynthesis' in window) {
-                speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'pt-PT';
-                speechSynthesis.speak(utterance);
-            }
-        }
-
-        function playAudio() {
-            const exercises = exerciseData[currentCategory];
-            speakPortuguese(exercises[currentExerciseIndex].portuguese);
-        }
-
-        function playAudioSlow() {
-            speakPortuguese(exerciseData[currentCategory][currentExerciseIndex].portuguese);
-        }
-
-        function toggleTranscription() {
-            const transcription = document.getElementById('transcription');
-            const button = document.getElementById('show-transcription');
-            
-            if (transcription.style.display === 'none') {
-                transcription.style.display = 'block';
-                button.textContent = 'Hide Transcription';
-            } else {
-                transcription.style.display = 'none';
-                button.textContent = 'Show Transcription';
-            }
-        }
-
-        function previousExercise() {
-            if (currentExerciseIndex > 0) {
-                loadExercise(currentExerciseIndex - 1);
-            }
-        }
-
-        function nextExercise() {
-            const exercises = exerciseData[currentCategory];
-            if (currentExerciseIndex < exercises.length - 1) {
-                loadExercise(currentExerciseIndex + 1);
-            }
-        }
-
-        async function startRecording() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                recordingMediaRecorder = new MediaRecorder(stream);
-                recordingChunks = [];
-
-                recordingMediaRecorder.ondataavailable = (event) => {
-                    recordingChunks.push(event.data);
-                };
-
-                recordingMediaRecorder.onstop = () => {
-                    const audioBlob = new Blob(recordingChunks, { type: 'audio/wav' });
-                    const audioUrl = URL.createObjectURL(audioBlob);
-                    
-                    document.getElementById('recording-playback').src = audioUrl;
-                    showRecordingFeedback('Great! Your recording has been saved. Click play to listen.');
-                };
-
-                recordingMediaRecorder.start();
-                
-                document.getElementById('record-btn').disabled = true;
-                document.getElementById('stop-btn').disabled = false;
-            } catch (error) {
-                showRecordingFeedback('Error accessing microphone. Please check permissions.', true);
-            }
-        }
-
-        function stopRecording() {
-            if (recordingMediaRecorder) {
-                recordingMediaRecorder.stop();
-                recordingMediaRecorder.stream.getTracks().forEach(track => track.stop());
-                
-                document.getElementById('record-btn').disabled = false;
-                document.getElementById('stop-btn').disabled = true;
-            }
-        }
-
-        function showRecordingFeedback(message, isError = false) {
-            const feedback = document.getElementById('recording-feedback');
-            feedback.textContent = message;
-            feedback.className = `feedback ${isError ? 'error' : 'success'}`;
-        }
-
-        function loadVocabularyTheme(theme) {
-            if (!theme) return;
-
-            const vocabList = vocabularyThemes[theme] || [];
-            const vocabContent = document.getElementById('vocab-content');
-
-            if (vocabList.length === 0) {
-                vocabContent.innerHTML = '<p class="placeholder">No vocabulary available for this theme.</p>';
-                return;
-            }
-
-            vocabContent.innerHTML = vocabList.map((item, index) => `
-                <div class="vocab-card">
-                    <div class="vocab-word">${item.word}</div>
-                    <div class="vocab-translation">${item.translation}</div>
-                    <button class="btn btn-control" onclick="speakPortuguese('${item.word}')">
-                        🔊 Pronounce
-                    </button>
-                </div>
-            `).join('');
         }
 
         function loadGrammarTopic(topic) {
             if (!topic) return;
 
+            currentTopic = topic;
+            answeredQuestions[topic] = answeredQuestions[topic] || {};
+            
             const questions = grammarTopics[topic] || [];
             const grammarContent = document.getElementById('grammar-content');
 
@@ -1168,67 +798,73 @@
             }
 
             grammarContent.innerHTML = questions.map((q, index) => `
-                <div class="card">
-                    <h4>${q.question}</h4>
-                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div class="question-number">Question ${index + 1} of ${questions.length}</div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${(index / questions.length) * 100}%"></div>
+                        </div>
+                    </div>
+                    <h4 style="margin-bottom: 1rem;">${q.question}</h4>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;" id="options-${index}">
                         ${q.options.map((option, optIndex) => `
-                            <button style="padding: 0.75rem; background: var(--light-bg); border: 2px solid var(--border-color); border-radius: 6px; cursor: pointer;" onclick="checkGrammarAnswer(${index}, ${optIndex}, ${q.correct}, '${q.explanation}')">
+                            <button class="grammar-option-btn" data-question="${index}" data-option="${optIndex}" data-correct="${q.correct}" data-explanation="${q.explanation}" onclick="handleGrammarAnswer(event)">
                                 ${option}
                             </button>
                         `).join('')}
                     </div>
-                    <div id="explanation-${index}" style="display: none; margin-top: 1rem; padding: 1rem; background: #e3f2fd; border-radius: 6px; color: #0078d4;">
-                        ${q.explanation}
+                    <div id="explanation-${index}" style="display: none; margin-top: 1rem; padding: 1rem; background: #e3f2fd; border-radius: 6px; color: #0078d4; border-left: 4px solid #0078d4;">
+                        ✓ ${q.explanation}
                     </div>
                 </div>
             `).join('');
         }
 
-        function checkGrammarAnswer(questionIndex, selectedIndex, correctIndex, explanation) {
-            const options = document.querySelectorAll('.grammar-exercises .card')[questionIndex].querySelectorAll('button');
+        function handleGrammarAnswer(event) {
+            const button = event.target;
+            const questionIndex = parseInt(button.getAttribute('data-question'));
+            const selectedIndex = parseInt(button.getAttribute('data-option'));
+            const correctIndex = parseInt(button.getAttribute('data-correct'));
+            const explanation = button.getAttribute('data-explanation');
             
-            options.forEach((opt, index) => {
-                if (index < 4) {
-                    if (index === correctIndex) {
-                        opt.style.backgroundColor = '#d4edda';
-                        opt.style.borderColor = '#28a745';
-                    } else if (index === selectedIndex && index !== correctIndex) {
-                        opt.style.backgroundColor = '#f8d7da';
-                        opt.style.borderColor = '#dc3545';
-                    }
-                    opt.style.pointerEvents = 'none';
+            const optionsContainer = document.getElementById(`options-${questionIndex}`);
+            const allButtons = optionsContainer.querySelectorAll('button');
+            
+            allButtons.forEach(btn => {
+                btn.disabled = true;
+                btn.style.pointerEvents = 'none';
+            });
+            
+            allButtons.forEach((btn, index) => {
+                if (index === correctIndex) {
+                    btn.style.backgroundColor = '#d4edda';
+                    btn.style.borderColor = '#28a745';
+                    btn.style.color = '#155724';
+                    btn.style.fontWeight = '600';
                 }
             });
-
+            
+            if (selectedIndex !== correctIndex) {
+                button.style.backgroundColor = '#f8d7da';
+                button.style.borderColor = '#dc3545';
+                button.style.color = '#721c24';
+            }
+            
             document.getElementById(`explanation-${questionIndex}`).style.display = 'block';
-        }
-
-        function updateProgressDisplay() {
-            let totalExercises = 0;
-
-            Object.keys(exerciseData).forEach(category => {
-                totalExercises += exerciseData[category].length;
-            });
-
-            document.getElementById('stat-total').textContent = totalExercises;
-            document.getElementById('stat-completed').textContent = '0';
-            document.getElementById('stat-accuracy').textContent = '0%';
-        }
-
-        function resetProgress() {
-            if (confirm('Are you sure you want to reset all your progress?')) {
-                userProgress = {};
-                localStorage.removeItem('userProgress');
-                updateProgressDisplay();
+            
+            // Track answered questions
+            if (currentTopic) {
+                answeredQuestions[currentTopic][questionIndex] = selectedIndex === correctIndex;
             }
         }
 
-        function exportProgress() {
-            alert('Export feature: Save your progress data. This will be implemented with download functionality.');
-        }
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                switchTab(this.dataset.tab);
+            });
+        });
 
         document.addEventListener('DOMContentLoaded', function() {
-            updateProgressDisplay();
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('sw.js').catch(() => {});
             }
