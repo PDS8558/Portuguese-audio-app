@@ -7,8 +7,565 @@
     <meta name="theme-color" content="#0078d4">
     <title>Portuguese GCSE Audio Trainer</title>
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="icon-192.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='50' font-size='80' text-anchor='middle' dy='.3em'>🎧</text></svg>">
+    <style>
+        :root {
+            --primary-color: #0078d4;
+            --secondary-color: #50e6ff;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --border-color: #e0e0e0;
+            --spacing-unit: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #005a9c 100%);
+            color: white;
+            padding: 2rem var(--spacing-unit);
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem;
+            background-color: var(--card-bg);
+            border-bottom: 2px solid var(--border-color);
+            overflow-x: auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background-color: transparent;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem var(--spacing-unit);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #005a9c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-control {
+            background-color: var(--secondary-color);
+            color: var(--text-dark);
+            padding: 0.6rem 1.2rem;
+            font-size: 0.95rem;
+            width: 100%;
+            margin: 0.5rem 0;
+        }
+
+        .btn-control:hover {
+            background-color: #36d5e9;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        select, input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+            margin-bottom: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus, input[type="text"]:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.1);
+        }
+
+        .category-selector {
+            margin-bottom: 2rem;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            font-size: 1.05rem;
+        }
+
+        .features-list li:before {
+            content: "✓ ";
+            color: var(--success-color);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .exercise-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .difficulty-badge.beginner {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .difficulty-badge.intermediate {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .difficulty-badge.advanced {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .portuguese-text {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 1rem;
+            background-color: var(--light-bg);
+            border-radius: 6px;
+            margin: 1rem 0;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .audio-player-section,
+        .transcription-section,
+        .speaking-practice {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: var(--light-bg);
+            border-radius: 6px;
+        }
+
+        .audio-controls,
+        .recording-controls {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .transcription {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .transcription p {
+            margin: 0.5rem 0;
+        }
+
+        .transcription strong {
+            color: var(--primary-color);
+        }
+
+        .speaking-practice h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .speaking-practice p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        #recording-playback {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .feedback.success {
+            display: block;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback.error {
+            display: block;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .progress-indicator {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .vocab-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid var(--border-color);
+        }
+
+        .vocab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        .vocab-word {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .vocab-translation {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 120, 212, 0.2);
+        }
+
+        .stat-card h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            opacity: 0.95;
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--text-light);
+            margin-top: auto;
+        }
+
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .placeholder {
+            text-align: center;
+            color: var(--text-light);
+            padding: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .exercise-card {
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .welcome-card {
+            text-align: center;
+        }
+
+        .quick-start {
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-tabs {
+                justify-content: flex-start;
+            }
+
+            .main-content {
+                padding: 1rem 0.5rem;
+            }
+
+            .card {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .vocab-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.95rem;
+            }
+
+            .audio-controls,
+            .recording-controls {
+                flex-direction: column;
+            }
+
+            .audio-controls button,
+            .recording-controls button {
+                width: 100%;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+            }
+
+            .navigation-buttons button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.4rem;
+            }
+
+            .header .subtitle {
+                font-size: 0.95rem;
+            }
+
+            .portuguese-text {
+                font-size: 1.2rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn-group button {
+                width: 100%;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --card-bg: #2d2d2d;
+                --light-bg: #1a1a1a;
+                --text-dark: #e0e0e0;
+                --text-light: #a0a0a0;
+                --border-color: #404040;
+            }
+
+            html, body {
+                background-color: var(--dark-bg);
+                color: var(--text-dark);
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -31,7 +588,7 @@
         <main class="main-content">
             <!-- Home Tab -->
             <section id="home" class="tab-content active">
-                <div class="welcome-card">
+                <div class="card welcome-card">
                     <h2>Welcome to Portuguese GCSE Audio Trainer</h2>
                     <p>This app helps you prepare for your GCSE Portuguese exam by providing:</p>
                     <ul class="features-list">
@@ -44,9 +601,9 @@
                     </ul>
                 </div>
 
-                <div class="quick-start">
+                <div class="card quick-start">
                     <h3>Quick Start</h3>
-                    <div class="button-group">
+                    <div class="btn-group">
                         <button class="btn btn-primary" onclick="switchTab('listen')">
                             Start Listening Exercise
                         </button>
@@ -56,7 +613,7 @@
                     </div>
                 </div>
 
-                <div class="info-card">
+                <div class="card">
                     <h3>💡 How to Use</h3>
                     <ol>
                         <li><strong>Listen & Repeat:</strong> Listen to authentic Portuguese audio and repeat for pronunciation practice</li>
@@ -128,7 +685,7 @@
                                 ⏹️ Stop Recording
                             </button>
                         </div>
-                        <audio id="recording-playback" style="margin-top: 10px;" controls></audio>
+                        <audio id="recording-playback" controls></audio>
                         <div id="recording-feedback" class="feedback"></div>
                     </div>
 
@@ -211,14 +768,14 @@
                     </div>
                 </div>
 
-                <div class="progress-section">
+                <div class="card">
                     <h3>Category Performance</h3>
                     <div id="category-progress" class="category-progress-list">
                         <p class="placeholder">Complete exercises to see your progress</p>
                     </div>
                 </div>
 
-                <div class="action-buttons">
+                <div class="btn-group">
                     <button class="btn btn-secondary" onclick="resetProgress()">
                         Reset Progress
                     </button>
@@ -231,17 +788,451 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>Portuguese GCSE Audio Trainer © 2026 | <a href="#" onclick="showAbout()">About</a> | <a href="#" onclick="showSettings()">Settings</a></p>
+            <p>Portuguese GCSE Audio Trainer © 2026</p>
         </footer>
     </div>
 
-    <!-- Service Worker Registration -->
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed:', err));
-        }
-    </script>
+        let currentCategory = null;
+        let currentExerciseIndex = 0;
+        let recordingMediaRecorder = null;
+        let recordingChunks = [];
+        let userProgress = JSON.parse(localStorage.getItem('userProgress')) || {};
 
-    <script src="app.js"></script>
+        const exerciseData = {
+            greetings: [
+                {
+                    id: 1,
+                    portuguese: "Olá, como está?",
+                    english: "Hello, how are you?",
+                    difficulty: "beginner"
+                },
+                {
+                    id: 2,
+                    portuguese: "Meu nome é João.",
+                    english: "My name is John.",
+                    difficulty: "beginner"
+                },
+                {
+                    id: 3,
+                    portuguese: "Muito prazer em conhecê-lo.",
+                    english: "Nice to meet you.",
+                    difficulty: "beginner"
+                }
+            ],
+            daily: [
+                {
+                    id: 1,
+                    portuguese: "Eu acordo às sete da manhã.",
+                    english: "I wake up at seven in the morning.",
+                    difficulty: "intermediate"
+                },
+                {
+                    id: 2,
+                    portuguese: "Tomo meu café da manhã.",
+                    english: "I have my breakfast.",
+                    difficulty: "intermediate"
+                }
+            ],
+            food: [
+                {
+                    id: 1,
+                    portuguese: "Quero uma cerveja e uma pizza.",
+                    english: "I want a beer and a pizza.",
+                    difficulty: "beginner"
+                },
+                {
+                    id: 2,
+                    portuguese: "A comida é deliciosa.",
+                    english: "The food is delicious.",
+                    difficulty: "beginner"
+                }
+            ],
+            shopping: [
+                {
+                    id: 1,
+                    portuguese: "Quanto custa?",
+                    english: "How much does it cost?",
+                    difficulty: "beginner"
+                }
+            ],
+            travel: [
+                {
+                    id: 1,
+                    portuguese: "Onde fica a estação de comboios?",
+                    english: "Where is the train station?",
+                    difficulty: "intermediate"
+                }
+            ],
+            school: [
+                {
+                    id: 1,
+                    portuguese: "Qual é a sua matéria favorita?",
+                    english: "What is your favorite subject?",
+                    difficulty: "intermediate"
+                }
+            ]
+        };
+
+        const vocabularyThemes = {
+            numbers: [
+                { word: "um", translation: "one" },
+                { word: "dois", translation: "two" },
+                { word: "três", translation: "three" },
+                { word: "quatro", translation: "four" },
+                { word: "cinco", translation: "five" },
+                { word: "dez", translation: "ten" },
+                { word: "vinte", translation: "twenty" },
+                { word: "cem", translation: "one hundred" }
+            ],
+            colors: [
+                { word: "vermelho", translation: "red" },
+                { word: "azul", translation: "blue" },
+                { word: "verde", translation: "green" },
+                { word: "amarelo", translation: "yellow" },
+                { word: "preto", translation: "black" },
+                { word: "branco", translation: "white" },
+                { word: "rosa", translation: "pink" }
+            ],
+            family: [
+                { word: "pai", translation: "father" },
+                { word: "mãe", translation: "mother" },
+                { word: "filho", translation: "son" },
+                { word: "filha", translation: "daughter" },
+                { word: "irmão", translation: "brother" },
+                { word: "irmã", translation: "sister" },
+                { word: "avó", translation: "grandmother" }
+            ],
+            animals: [
+                { word: "gato", translation: "cat" },
+                { word: "cão", translation: "dog" },
+                { word: "pássaro", translation: "bird" },
+                { word: "peixe", translation: "fish" }
+            ],
+            clothes: [
+                { word: "camisa", translation: "shirt" },
+                { word: "calça", translation: "pants" },
+                { word: "vestido", translation: "dress" },
+                { word: "sapato", translation: "shoe" }
+            ],
+            sports: [
+                { word: "futebol", translation: "football/soccer" },
+                { word: "natação", translation: "swimming" },
+                { word: "ténis", translation: "tennis" },
+                { word: "basquetebol", translation: "basketball" }
+            ]
+        };
+
+        const grammarTopics = {
+            present: [
+                {
+                    question: "Choose the correct form: 'Eu _____ português.'",
+                    options: ["falo", "falas", "falam", "falamos"],
+                    correct: 0,
+                    explanation: "First person singular: 'eu falo' (I speak)"
+                },
+                {
+                    question: "Choose the correct form: 'Ele _____ em Portugal.'",
+                    options: ["moro", "mora", "moram", "moramos"],
+                    correct: 1,
+                    explanation: "Third person singular: 'ele mora' (he lives)"
+                }
+            ],
+            past: [
+                {
+                    question: "Choose the correct past tense: 'Eu _____ no parque.'",
+                    options: ["jogo", "joguei", "jogava", "jogarei"],
+                    correct: 1,
+                    explanation: "Preterite: 'joguei' (I played)"
+                }
+            ],
+            future: [
+                {
+                    question: "Choose the correct future tense: 'Eu _____ amanhã.'",
+                    options: ["vou", "vou ir", "irei", "vou"],
+                    correct: 2,
+                    explanation: "Future: 'irei' (I will go)"
+                }
+            ],
+            adjectives: [
+                {
+                    question: "Choose the correct adjective: 'A casa é _____.'",
+                    options: ["grande", "grandes", "gran", "grando"],
+                    correct: 0,
+                    explanation: "Feminine singular: 'grande' (big)"
+                }
+            ],
+            pronouns: [
+                {
+                    question: "Choose the correct pronoun: '_____ somos amigos.'",
+                    options: ["Ele", "Nós", "Elas", "Você"],
+                    correct: 1,
+                    explanation: "First person plural: 'Nós' (We)"
+                }
+            ],
+            prepositions: [
+                {
+                    question: "Choose the correct preposition: 'O livro está _____ a mesa.'",
+                    options: ["em", "de", "para", "com"],
+                    correct: 0,
+                    explanation: "Location: 'em' (in/on)"
+                }
+            ]
+        };
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.nav-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById(tabName).classList.add('active');
+            
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        }
+
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                switchTab(this.dataset.tab);
+            });
+        });
+
+        function loadCategory(category) {
+            if (!category) return;
+            
+            currentCategory = category;
+            currentExerciseIndex = 0;
+            
+            const exercises = exerciseData[category] || [];
+            
+            if (exercises.length === 0) {
+                document.getElementById('listening-content').innerHTML = '<p class="placeholder">No exercises available for this category.</p>';
+                return;
+            }
+
+            document.getElementById('exercise-container').classList.remove('hidden');
+            loadExercise(0);
+        }
+
+        function loadExercise(index) {
+            const exercises = exerciseData[currentCategory];
+            
+            if (index < 0 || index >= exercises.length) {
+                return;
+            }
+
+            currentExerciseIndex = index;
+            const exercise = exercises[index];
+
+            document.getElementById('exercise-title').textContent = `Exercise ${index + 1}: ${exercise.english}`;
+            document.getElementById('difficulty').textContent = exercise.difficulty.charAt(0).toUpperCase() + exercise.difficulty.slice(1);
+            document.getElementById('difficulty').className = `difficulty-badge ${exercise.difficulty}`;
+            document.getElementById('portuguese-text').textContent = exercise.portuguese;
+            
+            document.getElementById('trans-portuguese').textContent = exercise.portuguese;
+            document.getElementById('trans-english').textContent = exercise.english;
+
+            document.getElementById('progress').textContent = `${index + 1} / ${exercises.length}`;
+
+            document.getElementById('prev-btn').disabled = index === 0;
+            document.getElementById('next-btn').disabled = index === exercises.length - 1;
+
+            document.getElementById('transcription').style.display = 'none';
+            document.getElementById('show-transcription').textContent = 'Show Transcription';
+
+            // Speak the Portuguese text
+            speakPortuguese(exercise.portuguese);
+        }
+
+        function speakPortuguese(text) {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'pt-PT';
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function playAudio() {
+            const exercises = exerciseData[currentCategory];
+            speakPortuguese(exercises[currentExerciseIndex].portuguese);
+        }
+
+        function playAudioSlow() {
+            speakPortuguese(exerciseData[currentCategory][currentExerciseIndex].portuguese);
+        }
+
+        function toggleTranscription() {
+            const transcription = document.getElementById('transcription');
+            const button = document.getElementById('show-transcription');
+            
+            if (transcription.style.display === 'none') {
+                transcription.style.display = 'block';
+                button.textContent = 'Hide Transcription';
+            } else {
+                transcription.style.display = 'none';
+                button.textContent = 'Show Transcription';
+            }
+        }
+
+        function previousExercise() {
+            if (currentExerciseIndex > 0) {
+                loadExercise(currentExerciseIndex - 1);
+            }
+        }
+
+        function nextExercise() {
+            const exercises = exerciseData[currentCategory];
+            if (currentExerciseIndex < exercises.length - 1) {
+                loadExercise(currentExerciseIndex + 1);
+            }
+        }
+
+        async function startRecording() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                recordingMediaRecorder = new MediaRecorder(stream);
+                recordingChunks = [];
+
+                recordingMediaRecorder.ondataavailable = (event) => {
+                    recordingChunks.push(event.data);
+                };
+
+                recordingMediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(recordingChunks, { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    
+                    document.getElementById('recording-playback').src = audioUrl;
+                    showRecordingFeedback('Great! Your recording has been saved. Click play to listen.');
+                };
+
+                recordingMediaRecorder.start();
+                
+                document.getElementById('record-btn').disabled = true;
+                document.getElementById('stop-btn').disabled = false;
+            } catch (error) {
+                showRecordingFeedback('Error accessing microphone. Please check permissions.', true);
+            }
+        }
+
+        function stopRecording() {
+            if (recordingMediaRecorder) {
+                recordingMediaRecorder.stop();
+                recordingMediaRecorder.stream.getTracks().forEach(track => track.stop());
+                
+                document.getElementById('record-btn').disabled = false;
+                document.getElementById('stop-btn').disabled = true;
+            }
+        }
+
+        function showRecordingFeedback(message, isError = false) {
+            const feedback = document.getElementById('recording-feedback');
+            feedback.textContent = message;
+            feedback.className = `feedback ${isError ? 'error' : 'success'}`;
+        }
+
+        function loadVocabularyTheme(theme) {
+            if (!theme) return;
+
+            const vocabList = vocabularyThemes[theme] || [];
+            const vocabContent = document.getElementById('vocab-content');
+
+            if (vocabList.length === 0) {
+                vocabContent.innerHTML = '<p class="placeholder">No vocabulary available for this theme.</p>';
+                return;
+            }
+
+            vocabContent.innerHTML = vocabList.map((item, index) => `
+                <div class="vocab-card">
+                    <div class="vocab-word">${item.word}</div>
+                    <div class="vocab-translation">${item.translation}</div>
+                    <button class="btn btn-control" onclick="speakPortuguese('${item.word}')">
+                        🔊 Pronounce
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function loadGrammarTopic(topic) {
+            if (!topic) return;
+
+            const questions = grammarTopics[topic] || [];
+            const grammarContent = document.getElementById('grammar-content');
+
+            if (questions.length === 0) {
+                grammarContent.innerHTML = '<p class="placeholder">No exercises available for this topic.</p>';
+                return;
+            }
+
+            grammarContent.innerHTML = questions.map((q, index) => `
+                <div class="card">
+                    <h4>${q.question}</h4>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        ${q.options.map((option, optIndex) => `
+                            <button style="padding: 0.75rem; background: var(--light-bg); border: 2px solid var(--border-color); border-radius: 6px; cursor: pointer;" onclick="checkGrammarAnswer(${index}, ${optIndex}, ${q.correct}, '${q.explanation}')">
+                                ${option}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div id="explanation-${index}" style="display: none; margin-top: 1rem; padding: 1rem; background: #e3f2fd; border-radius: 6px; color: #0078d4;">
+                        ${q.explanation}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function checkGrammarAnswer(questionIndex, selectedIndex, correctIndex, explanation) {
+            const options = document.querySelectorAll('.grammar-exercises .card')[questionIndex].querySelectorAll('button');
+            
+            options.forEach((opt, index) => {
+                if (index < 4) {
+                    if (index === correctIndex) {
+                        opt.style.backgroundColor = '#d4edda';
+                        opt.style.borderColor = '#28a745';
+                    } else if (index === selectedIndex && index !== correctIndex) {
+                        opt.style.backgroundColor = '#f8d7da';
+                        opt.style.borderColor = '#dc3545';
+                    }
+                    opt.style.pointerEvents = 'none';
+                }
+            });
+
+            document.getElementById(`explanation-${questionIndex}`).style.display = 'block';
+        }
+
+        function updateProgressDisplay() {
+            let totalExercises = 0;
+
+            Object.keys(exerciseData).forEach(category => {
+                totalExercises += exerciseData[category].length;
+            });
+
+            document.getElementById('stat-total').textContent = totalExercises;
+            document.getElementById('stat-completed').textContent = '0';
+            document.getElementById('stat-accuracy').textContent = '0%';
+        }
+
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all your progress?')) {
+                userProgress = {};
+                localStorage.removeItem('userProgress');
+                updateProgressDisplay();
+            }
+        }
+
+        function exportProgress() {
+            alert('Export feature: Save your progress data. This will be implemented with download functionality.');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgressDisplay();
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js').catch(() => {});
+            }
+        });
+    </script>
 </body>
 </html>
