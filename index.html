@@ -246,6 +246,64 @@
             cursor: not-allowed;
         }
 
+        .audio-section {
+            background: #f0f8ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .audio-player {
+            width: 100%;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 6px;
+        }
+
+        .audio-controls {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .recording-section {
+            background: #fff0f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .portuguese-text {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 1rem;
+            background-color: var(--light-bg);
+            border-radius: 6px;
+            margin: 1rem 0;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .transcription {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .transcription p {
+            margin: 0.5rem 0;
+        }
+
+        .transcription strong {
+            color: var(--primary-color);
+        }
+
         .footer {
             background: var(--card-bg);
             border-top: 1px solid var(--border-color);
@@ -287,6 +345,62 @@
             margin-bottom: 1rem;
         }
 
+        .exercise-navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .feedback.success {
+            display: block;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback.error {
+            display: block;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 120, 212, 0.2);
+        }
+
+        .stat-card h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            opacity: 0.95;
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8rem;
@@ -299,6 +413,18 @@
             .card {
                 padding: 1rem;
                 margin-bottom: 1rem;
+            }
+
+            .audio-controls {
+                flex-direction: column;
+            }
+
+            .audio-controls button {
+                width: 100%;
+            }
+
+            .exercise-navigation {
+                flex-direction: column;
             }
         }
 
@@ -315,6 +441,18 @@
                 background-color: var(--dark-bg);
                 color: var(--text-dark);
             }
+
+            .audio-section {
+                background: #0a1f3a;
+            }
+
+            .recording-section {
+                background: #3a0a0a;
+            }
+
+            .audio-player {
+                background: #2d2d2d;
+            }
         }
     </style>
 </head>
@@ -327,6 +465,7 @@
 
         <nav class="nav-tabs">
             <button class="nav-tab active" data-tab="home">Home</button>
+            <button class="nav-tab" data-tab="audio">🎵 Audio Practice</button>
             <button class="nav-tab" data-tab="grammar">Grammar</button>
             <button class="nav-tab" data-tab="progress">Progress</button>
         </nav>
@@ -337,7 +476,9 @@
                     <h2>Welcome to Portuguese GCSE Audio Trainer</h2>
                     <p>This app helps you prepare for your GCSE Portuguese exam by providing:</p>
                     <ul class="features-list">
-                        <li>✏️ 10 Grammar exercises per topic</li>
+                        <li>🎵 Audio listening exercises with real Portuguese pronunciation</li>
+                        <li>🎤 Recording feature to practice speaking and compare</li>
+                        <li>✏️ 10 Grammar exercises per topic (60 questions total)</li>
                         <li>📊 Progress tracking and statistics</li>
                         <li>🎯 Instant feedback and explanations</li>
                         <li>🌙 Offline functionality - study anywhere</li>
@@ -347,15 +488,98 @@
                 <div class="card">
                     <h3>Quick Start</h3>
                     <div class="btn-group">
-                        <button class="btn btn-primary" onclick="switchTab('grammar')">
-                            Start Grammar Practice
+                        <button class="btn btn-primary" onclick="switchTab('audio')">
+                            🎵 Start Audio Practice
                         </button>
+                        <button class="btn btn-primary" onclick="switchTab('grammar')">
+                            ✏️ Start Grammar Practice
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>📚 How to Use</h3>
+                    <ol style="margin-left: 1.5rem;">
+                        <li><strong>Audio Practice:</strong> Listen to Portuguese phrases with pronunciation guides. Record yourself and compare your accent!</li>
+                        <li><strong>Grammar:</strong> Complete 10 exercises per topic to master verb conjugations and structures</li>
+                        <li><strong>Progress:</strong> Track your learning journey and identify areas to improve</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="audio" class="tab-content">
+                <h2>🎵 Audio Listening & Speaking Practice</h2>
+                
+                <div class="category-selector">
+                    <label for="audio-category">Select Category:</label>
+                    <select id="audio-category" onchange="loadAudioCategory(this.value)">
+                        <option value="">Choose a category...</option>
+                        <option value="greetings">Greetings & Introductions</option>
+                        <option value="daily">Daily Routines</option>
+                        <option value="food">Food & Drinks</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="travel">Travel & Transport</option>
+                        <option value="school">School & Education</option>
+                    </select>
+                </div>
+
+                <div id="audio-content" class="placeholder">
+                    Select a category to begin
+                </div>
+
+                <div id="exercise-container" class="hidden">
+                    <div class="card">
+                        <h3 id="audio-title"></h3>
+                        <div class="portuguese-text" id="portuguese-text"></div>
+
+                        <div class="audio-section">
+                            <h4>🔊 Listen to the Pronunciation</h4>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.5rem;">Click the buttons below to hear the phrase at different speeds:</p>
+                            <div class="audio-controls">
+                                <button class="btn btn-control" onclick="speakAudio('normal')">
+                                    🔊 Normal Speed
+                                </button>
+                                <button class="btn btn-control" onclick="speakAudio('slow')">
+                                    🐢 Slow Speed
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card" style="background: var(--light-bg);">
+                            <h4>📖 Translation</h4>
+                            <p id="english-translation" style="font-size: 1.1rem; margin: 0.5rem 0;"></p>
+                        </div>
+
+                        <div class="recording-section">
+                            <h4>🎤 Record Yourself & Practice Speaking</h4>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">Try to repeat the phrase with the same accent and pronunciation:</p>
+                            <div class="audio-controls">
+                                <button class="btn btn-control" id="record-start-btn" onclick="startRecording()" style="background-color: #ff6b6b;">
+                                    🔴 Start Recording
+                                </button>
+                                <button class="btn btn-control" id="record-stop-btn" onclick="stopRecording()" style="background-color: #888; display: none;">
+                                    ⏹️ Stop Recording
+                                </button>
+                            </div>
+                            <div id="recording-feedback" class="feedback"></div>
+                            <audio id="playback-audio" class="audio-player" controls style="margin-top: 1rem;"></audio>
+                        </div>
+
+                        <div class="exercise-navigation">
+                            <button class="btn btn-secondary" id="prev-audio-btn" onclick="previousAudio()">
+                                ← Previous
+                            </button>
+                            <span class="progress-indicator" id="audio-progress"></span>
+                            <button class="btn btn-secondary" id="next-audio-btn" onclick="nextAudio()">
+                                Next →
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section id="grammar" class="tab-content">
-                <h2>Grammar Practice</h2>
+                <h2>✏️ Grammar Practice</h2>
                 
                 <div class="category-selector">
                     <label for="grammar-category">Select Topic:</label>
@@ -376,399 +600,203 @@
             </section>
 
             <section id="progress" class="tab-content">
-                <h2>Your Progress</h2>
-                <div class="card">
-                    <h3>Topic Performance</h3>
-                    <div id="progress-content">
-                        <p class="placeholder">Complete exercises to see your progress</p>
+                <h2>📊 Your Progress</h2>
+                
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <h3>Audio Exercises</h3>
+                        <p class="stat-number" id="stat-audio">0</p>
                     </div>
+                    <div class="stat-card">
+                        <h3>Grammar Exercises</h3>
+                        <p class="stat-number" id="stat-grammar">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Recordings Made</h3>
+                        <p class="stat-number" id="stat-recordings">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Topics Covered</h3>
+                        <p class="stat-number" id="stat-topics">6</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Keep Learning!</h3>
+                    <p>💡 Consistent practice is key to success. Try to:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                        <li>Complete at least 10 minutes of practice daily</li>
+                        <li>Focus on your weak areas</li>
+                        <li>Record yourself multiple times and compare</li>
+                        <li>Practice grammar first, then audio for application</li>
+                    </ul>
                 </div>
             </section>
         </main>
 
         <footer class="footer">
-            <p>Portuguese GCSE Audio Trainer © 2026</p>
+            <p>Portuguese GCSE Audio Trainer © 2026 | All rights reserved</p>
         </footer>
     </div>
 
     <script>
-        const grammarTopics = {
-            present: [
-                {
-                    question: "Choose the correct form: 'Eu _____ português.'",
-                    options: ["falo", "falas", "falam", "falamos"],
-                    correct: 0,
-                    explanation: "First person singular: 'eu falo' (I speak)"
-                },
-                {
-                    question: "Choose the correct form: 'Ele _____ em Portugal.'",
-                    options: ["moro", "mora", "moram", "moramos"],
-                    correct: 1,
-                    explanation: "Third person singular: 'ele mora' (he lives)"
-                },
-                {
-                    question: "Choose the correct form: 'Nós _____ na escola.'",
-                    options: ["trabalho", "trabalha", "trabalham", "trabalhamos"],
-                    correct: 3,
-                    explanation: "First person plural: 'nós trabalhamos' (we work)"
-                },
-                {
-                    question: "Choose the correct form: 'Ela _____ um livro.'",
-                    options: ["leio", "lê", "leem", "lemos"],
-                    correct: 1,
-                    explanation: "Third person singular: 'ela lê' (she reads)"
-                },
-                {
-                    question: "Choose the correct form: 'Eles _____ pizza.'",
-                    options: ["como", "come", "comemos", "comem"],
-                    correct: 3,
-                    explanation: "Third person plural: 'eles comem' (they eat)"
-                },
-                {
-                    question: "Choose the correct form: 'Você _____ inglês?'",
-                    options: ["falo", "falas", "fala", "falamos"],
-                    correct: 2,
-                    explanation: "Second person formal: 'você fala' (you speak)"
-                },
-                {
-                    question: "Choose the correct form: 'Tu _____ aqui.'",
-                    options: ["moro", "moras", "mora", "moram"],
-                    correct: 1,
-                    explanation: "Second person informal: 'tu moras' (you live)"
-                },
-                {
-                    question: "Choose the correct form: 'Eu _____ a porta.'",
-                    options: ["abro", "abres", "abre", "abrem"],
-                    correct: 0,
-                    explanation: "First person singular: 'eu abro' (I open)"
-                },
-                {
-                    question: "Choose the correct form: 'Elas _____ felizes.'",
-                    options: ["sou", "é", "somos", "são"],
-                    correct: 3,
-                    explanation: "Third person plural of 'ser': 'elas são' (they are)"
-                },
-                {
-                    question: "Choose the correct form: 'Nós _____ no cinema.'",
-                    options: ["vou", "vai", "vamos", "vão"],
-                    correct: 2,
-                    explanation: "First person plural: 'nós vamos' (we go)"
-                }
+        // Audio Exercise Data
+        const audioExercises = {
+            greetings: [
+                { portuguese: "Olá, como está?", english: "Hello, how are you?" },
+                { portuguese: "Meu nome é João.", english: "My name is John." },
+                { portuguese: "Muito prazer em conhecê-lo.", english: "Nice to meet you." },
+                { portuguese: "Como vai?", english: "How are you? (informal)" },
+                { portuguese: "Estou bem, obrigado.", english: "I'm well, thank you." },
+                { portuguese: "Onde você mora?", english: "Where do you live?" },
+                { portuguese: "Que prazer!", english: "What a pleasure!" },
+                { portuguese: "Tudo bem com você?", english: "Is everything okay with you?" },
+                { portuguese: "Fico muito feliz em conhecê-lo.", english: "I'm very happy to meet you." },
+                { portuguese: "Seja bem-vindo!", english: "Welcome!" }
             ],
-            past: [
-                {
-                    question: "Choose the correct past tense: 'Eu _____ no parque.'",
-                    options: ["jogo", "joguei", "jogava", "jogarei"],
-                    correct: 1,
-                    explanation: "Preterite: 'joguei' (I played)"
-                },
-                {
-                    question: "Choose the correct past tense: 'Ele _____ um carro novo.'",
-                    options: ["compra", "comprou", "compraria", "comprará"],
-                    correct: 1,
-                    explanation: "Preterite: 'comprou' (he bought)"
-                },
-                {
-                    question: "Choose the correct past tense: 'Eles _____ para casa.'",
-                    options: ["vão", "foram", "vão", "irão"],
-                    correct: 1,
-                    explanation: "Preterite: 'foram' (they went)"
-                },
-                {
-                    question: "Choose the correct past tense: 'Ela _____ o filme.'",
-                    options: ["assiste", "assistiu", "assistirá", "assistia"],
-                    correct: 1,
-                    explanation: "Preterite: 'assistiu' (she watched)"
-                },
-                {
-                    question: "Choose the correct past tense: 'Nós _____ a festa.'",
-                    options: ["adoramos", "adorámos", "adorávamos", "adoraremos"],
-                    correct: 0,
-                    explanation: "Preterite: 'adoramos' (we loved)"
-                },
-                {
-                    question: "Choose the correct past tense: 'Você _____ à praia?'",
-                    options: ["vai", "foi", "irá", "iria"],
-                    correct: 1,
-                    explanation: "Preterite: 'foi' (you went)"
-                },
-                {
-                    question: "Choose the correct past tense: 'Eu _____ em Lisboa.'",
-                    options: ["viva", "vivia", "vivi", "viverei"],
-                    correct: 2,
-                    explanation: "Preterite: 'vivi' (I lived)"
-                },
-                {
-                    question: "Choose the correct past tense: 'Elas _____ as lições.'",
-                    options: ["aprendem", "aprenderam", "aprendia", "aprenderão"],
-                    correct: 1,
-                    explanation: "Preterite: 'aprenderam' (they learned)"
-                },
-                {
-                    question: "Choose the correct past tense: 'Eu _____ muito cansado.'",
-                    options: ["sou", "fui", "era", "seria"],
-                    correct: 2,
-                    explanation: "Imperfect: 'era' (I was/used to be)"
-                },
-                {
-                    question: "Choose the correct past tense: 'Ele _____ lá quando a conheceu.'",
-                    options: ["trabalha", "trabalhou", "trabalhava", "trabalhará"],
-                    correct: 2,
-                    explanation: "Imperfect: 'trabalhava' (he used to work)"
-                }
+            daily: [
+                { portuguese: "Eu acordo às sete da manhã.", english: "I wake up at seven in the morning." },
+                { portuguese: "Tomo meu café da manhã.", english: "I have my breakfast." },
+                { portuguese: "Vou ao trabalho.", english: "I go to work." },
+                { portuguese: "Almoço ao meio-dia.", english: "I have lunch at noon." },
+                { portuguese: "Trabalho na tarde.", english: "I work in the afternoon." },
+                { portuguese: "Volto para casa às seis.", english: "I return home at six." },
+                { portuguese: "Janto com minha família.", english: "I have dinner with my family." },
+                { portuguese: "Assisto à televisão.", english: "I watch television." },
+                { portuguese: "Estudo um pouco.", english: "I study a bit." },
+                { portuguese: "Vou para a cama.", english: "I go to bed." }
             ],
-            future: [
-                {
-                    question: "Choose the correct future tense: 'Eu _____ amanhã.'",
-                    options: ["vou", "vou ir", "irei", "ia"],
-                    correct: 2,
-                    explanation: "Future: 'irei' (I will go)"
-                },
-                {
-                    question: "Choose the correct future tense: 'Ela _____ na universidade.'",
-                    options: ["estuda", "estudará", "estudava", "estudou"],
-                    correct: 1,
-                    explanation: "Future: 'estudará' (she will study)"
-                },
-                {
-                    question: "Choose the correct future tense: 'Nós _____ juntos.'",
-                    options: ["viajaremos", "viajamos", "viajávamos", "viajámos"],
-                    correct: 0,
-                    explanation: "Future: 'viajaremos' (we will travel)"
-                },
-                {
-                    question: "Choose the correct future tense: 'Eles _____ a competição.'",
-                    options: ["ganham", "ganharam", "ganharão", "ganhava"],
-                    correct: 2,
-                    explanation: "Future: 'ganharão' (they will win)"
-                },
-                {
-                    question: "Choose the correct future tense: 'Você _____ sucesso.'",
-                    options: ["terá", "tem", "tinha", "teve"],
-                    correct: 0,
-                    explanation: "Future: 'terá' (you will have)"
-                },
-                {
-                    question: "Choose the correct future tense: 'Eu _____ uma casa grande.'",
-                    options: ["compro", "compraria", "comprarei", "comprei"],
-                    correct: 2,
-                    explanation: "Future: 'comprarei' (I will buy)"
-                },
-                {
-                    question: "Choose the correct future tense: 'Ela _____ o trabalho em tempo.'",
-                    options: ["termina", "terminou", "terminará", "terminava"],
-                    correct: 2,
-                    explanation: "Future: 'terminará' (she will finish)"
-                },
-                {
-                    question: "Choose the correct future tense: 'Elas _____ ao encontro.'",
-                    options: ["vão", "irão", "foram", "iam"],
-                    correct: 1,
-                    explanation: "Future: 'irão' (they will go)"
-                },
-                {
-                    question: "Choose the correct future tense: 'Nós _____ felizes.'",
-                    options: ["seremos", "somos", "éramos", "fomos"],
-                    correct: 0,
-                    explanation: "Future: 'seremos' (we will be)"
-                },
-                {
-                    question: "Choose the correct future tense: 'Ele _____ para Portugal.'",
-                    options: ["volta", "voltaria", "voltará", "voltava"],
-                    correct: 2,
-                    explanation: "Future: 'voltará' (he will return)"
-                }
+            food: [
+                { portuguese: "Quero uma cerveja e uma pizza.", english: "I want a beer and a pizza." },
+                { portuguese: "A comida é deliciosa.", english: "The food is delicious." },
+                { portuguese: "Que delícia!", english: "How delicious!" },
+                { portuguese: "Você gosta de comida portuguesa?", english: "Do you like Portuguese food?" },
+                { portuguese: "Prefiro fruta fresca.", english: "I prefer fresh fruit." },
+                { portuguese: "Passe-me o pão, por favor.", english: "Pass me the bread, please." },
+                { portuguese: "Mais um pouco de sopa.", english: "A bit more soup." },
+                { portuguese: "Este bolo é muito bom.", english: "This cake is very good." },
+                { portuguese: "Vou comer um sanduíche.", english: "I'm going to eat a sandwich." },
+                { portuguese: "Temos água mineral?", english: "Do we have mineral water?" }
             ],
-            adjectives: [
-                {
-                    question: "Choose the correct adjective: 'A casa é _____.'",
-                    options: ["grande", "grandes", "gran", "grando"],
-                    correct: 0,
-                    explanation: "Feminine singular: 'grande' (big)"
-                },
-                {
-                    question: "Choose the correct adjective: 'Os livros são _____.'",
-                    options: ["interessante", "interessante", "interessantes", "interessanto"],
-                    correct: 2,
-                    explanation: "Masculine plural: 'interessantes' (interesting)"
-                },
-                {
-                    question: "Choose the correct adjective: 'A menina é _____.'",
-                    options: ["bonito", "bonita", "bonito", "bonitó"],
-                    correct: 1,
-                    explanation: "Feminine singular: 'bonita' (pretty)"
-                },
-                {
-                    question: "Choose the correct adjective: 'Os carros são _____.'",
-                    options: ["novo", "novos", "nova", "novas"],
-                    correct: 1,
-                    explanation: "Masculine plural: 'novos' (new)"
-                },
-                {
-                    question: "Choose the correct adjective: 'As meninas são _____.'",
-                    options: ["inteligente", "inteligente", "inteligentes", "inteliganto"],
-                    correct: 2,
-                    explanation: "Feminine plural: 'inteligentes' (intelligent)"
-                },
-                {
-                    question: "Choose the correct adjective: 'O professor é _____.'",
-                    options: ["estrito", "estrita", "estritos", "estritas"],
-                    correct: 0,
-                    explanation: "Masculine singular: 'estrito' (strict)"
-                },
-                {
-                    question: "Choose the correct adjective: 'A aula é _____.'",
-                    options: ["difícil", "difícilo", "difícila", "difíciles"],
-                    correct: 0,
-                    explanation: "Feminine singular: 'difícil' (difficult)"
-                },
-                {
-                    question: "Choose the correct adjective: 'Os alunos são _____.'",
-                    options: ["divertido", "divertida", "divertidos", "divertidas"],
-                    correct: 2,
-                    explanation: "Masculine plural: 'divertidos' (fun)"
-                },
-                {
-                    question: "Choose the correct adjective: 'A resposta é _____.'",
-                    options: ["correto", "correta", "corretos", "corretas"],
-                    correct: 1,
-                    explanation: "Feminine singular: 'correta' (correct)"
-                },
-                {
-                    question: "Choose the correct adjective: 'As comidas são _____.'",
-                    options: ["delicioso", "deliciosa", "deliciosos", "deliciosas"],
-                    correct: 3,
-                    explanation: "Feminine plural: 'deliciosas' (delicious)"
-                }
+            shopping: [
+                { portuguese: "Quanto custa?", english: "How much does it cost?" },
+                { portuguese: "Isto é muito caro.", english: "This is very expensive." },
+                { portuguese: "Tem um desconto?", english: "Do you have a discount?" },
+                { portuguese: "Prefiro aquele.", english: "I prefer that one." },
+                { portuguese: "Qual é o tamanho?", english: "What is the size?" },
+                { portuguese: "Tem uma cor diferente?", english: "Do you have a different color?" },
+                { portuguese: "Vou levar isto.", english: "I'll take this." },
+                { portuguese: "Onde é a caixa?", english: "Where is the checkout?" },
+                { portuguese: "Aceita cartão de crédito?", english: "Do you accept credit cards?" },
+                { portuguese: "Obrigado, tenha um bom dia!", english: "Thank you, have a good day!" }
             ],
-            pronouns: [
-                {
-                    question: "Choose the correct pronoun: '_____ somos amigos.'",
-                    options: ["Ele", "Nós", "Elas", "Você"],
-                    correct: 1,
-                    explanation: "First person plural: 'Nós' (We)"
-                },
-                {
-                    question: "Choose the correct pronoun: '_____ é professor.'",
-                    options: ["Eles", "Ela", "Nós", "Eu"],
-                    correct: 1,
-                    explanation: "Third person feminine: 'Ela' (She)"
-                },
-                {
-                    question: "Choose the correct pronoun: '_____ estou feliz.'",
-                    options: ["Tu", "Eu", "Ele", "Você"],
-                    correct: 1,
-                    explanation: "First person singular: 'Eu' (I)"
-                },
-                {
-                    question: "Choose the correct pronoun: '_____ vão à praia.'",
-                    options: ["Ele", "Eu", "Eles", "Tu"],
-                    correct: 2,
-                    explanation: "Third person plural: 'Eles' (They)"
-                },
-                {
-                    question: "Choose the correct pronoun: '_____ falam português?'",
-                    options: ["Vocês", "Nós", "Ele", "Eu"],
-                    correct: 0,
-                    explanation: "Second person plural: 'Vocês' (You all)"
-                },
-                {
-                    question: "Choose the correct pronoun: '_____ comes maçã.'",
-                    options: ["Tu", "Ele", "Nós", "Eles"],
-                    correct: 0,
-                    explanation: "Second person informal: 'Tu' (You informal)"
-                },
-                {
-                    question: "Choose the correct pronoun: '_____ mora em Lisboa.'",
-                    options: ["Vocês", "Eu", "Você", "Eles"],
-                    correct: 2,
-                    explanation: "Second person formal: 'Você' (You formal)"
-                },
-                {
-                    question: "Choose the correct pronoun: '_____ trabalham na fábrica.'",
-                    options: ["Eu", "Tu", "Elas", "Você"],
-                    correct: 2,
-                    explanation: "Third person plural feminine: 'Elas' (They-f)"
-                },
-                {
-                    question: "Choose the correct pronoun: '_____ comemos juntos.'",
-                    options: ["Nós", "Você", "Eles", "Eu"],
-                    correct: 0,
-                    explanation: "First person plural: 'Nós' (We)"
-                },
-                {
-                    question: "Choose the correct pronoun: '_____ é muito alto.'",
-                    options: ["Tu", "Ele", "Nós", "Vocês"],
-                    correct: 1,
-                    explanation: "Third person masculine: 'Ele' (He)"
-                }
+            travel: [
+                { portuguese: "Onde fica a estação de comboios?", english: "Where is the train station?" },
+                { portuguese: "Um bilhete para Lisboa, por favor.", english: "A ticket to Lisbon, please." },
+                { portuguese: "A que horas sai o próximo autocarro?", english: "What time does the next bus leave?" },
+                { portuguese: "Quanto custa a passagem aérea?", english: "How much is the flight ticket?" },
+                { portuguese: "Preciso de um hotel.", english: "I need a hotel." },
+                { portuguese: "Qual é o caminho para o centro?", english: "What is the way to the center?" },
+                { portuguese: "Há quartos disponíveis?", english: "Are there rooms available?" },
+                { portuguese: "Que maravilhoso!", english: "How wonderful!" },
+                { portuguese: "Vou voltar para casa amanhã.", english: "I'm going back home tomorrow." },
+                { portuguese: "Viagem segura!", english: "Safe journey!" }
             ],
-            prepositions: [
-                {
-                    question: "Choose the correct preposition: 'O livro está _____ a mesa.'",
-                    options: ["em", "de", "para", "com"],
-                    correct: 0,
-                    explanation: "Location: 'em' (in/on)"
-                },
-                {
-                    question: "Choose the correct preposition: 'Eu vou _____ Lisboa.'",
-                    options: ["em", "de", "para", "com"],
-                    correct: 2,
-                    explanation: "Destination: 'para' (to)"
-                },
-                {
-                    question: "Choose the correct preposition: 'Este carro é _____ João.'",
-                    options: ["em", "de", "para", "com"],
-                    correct: 1,
-                    explanation: "Possession: 'de' (of)"
-                },
-                {
-                    question: "Choose the correct preposition: 'Ela fala _____ seu amigo.'",
-                    options: ["em", "de", "para", "com"],
-                    correct: 3,
-                    explanation: "Accompaniment: 'com' (with)"
-                },
-                {
-                    question: "Choose the correct preposition: 'Eles moram _____ Portugal.'",
-                    options: ["em", "de", "para", "a"],
-                    correct: 0,
-                    explanation: "Location: 'em' (in)"
-                },
-                {
-                    question: "Choose the correct preposition: 'Este presente é _____ você.'",
-                    options: ["em", "de", "para", "com"],
-                    correct: 2,
-                    explanation: "Destination/Recipient: 'para' (for)"
-                },
-                {
-                    question: "Choose the correct preposition: 'A senha _____ o banco é 1234.'",
-                    options: ["em", "de", "para", "com"],
-                    correct: 1,
-                    explanation: "Possession: 'de' (of)"
-                },
-                {
-                    question: "Choose the correct preposition: 'Ele trabalha _____ a empresa.'",
-                    options: ["em", "de", "para", "com"],
-                    correct: 0,
-                    explanation: "Location: 'em' (in)"
-                },
-                {
-                    question: "Choose the correct preposition: 'Vou ficar _____ casa esta noite.'",
-                    options: ["em", "de", "a", "com"],
-                    correct: 0,
-                    explanation: "Location: 'em' (at)"
-                },
-                {
-                    question: "Choose the correct preposition: 'Ele veio _____ carro.'",
-                    options: ["em", "de", "para", "com"],
-                    correct: 0,
-                    explanation: "Transportation: 'em' (by)"
-                }
+            school: [
+                { portuguese: "Qual é a sua matéria favorita?", english: "What is your favorite subject?" },
+                { portuguese: "Tenho aula de português.", english: "I have a Portuguese class." },
+                { portuguese: "O trabalho de casa é difícil.", english: "The homework is difficult." },
+                { portuguese: "Tenho um exame amanhã.", english: "I have an exam tomorrow." },
+                { portuguese: "A biblioteca está fechada?", english: "Is the library closed?" },
+                { portuguese: "Preciso estudar mais.", english: "I need to study more." },
+                { portuguese: "Qual é a hora do intervalo?", english: "What time is the break?" },
+                { portuguese: "O professor é muito bom.", english: "The teacher is very good." },
+                { portuguese: "Consegui uma nota excelente!", english: "I got an excellent grade!" },
+                { portuguese: "Adorei essa lição.", english: "I loved that lesson." }
             ]
         };
 
+        // Grammar Topics
+        const grammarTopics = {
+            present: [
+                { question: "Choose the correct form: 'Eu _____ português.'", options: ["falo", "falas", "falam", "falamos"], correct: 0, explanation: "First person singular: 'eu falo' (I speak)" },
+                { question: "Choose the correct form: 'Ele _____ em Portugal.'", options: ["moro", "mora", "moram", "moramos"], correct: 1, explanation: "Third person singular: 'ele mora' (he lives)" },
+                { question: "Choose the correct form: 'Nós _____ na escola.'", options: ["trabalho", "trabalha", "trabalham", "trabalhamos"], correct: 3, explanation: "First person plural: 'nós trabalhamos' (we work)" },
+                { question: "Choose the correct form: 'Ela _____ um livro.'", options: ["leio", "lê", "leem", "lemos"], correct: 1, explanation: "Third person singular: 'ela lê' (she reads)" },
+                { question: "Choose the correct form: 'Eles _____ pizza.'", options: ["como", "come", "comemos", "comem"], correct: 3, explanation: "Third person plural: 'eles comem' (they eat)" },
+                { question: "Choose the correct form: 'Você _____ inglês?'", options: ["falo", "falas", "fala", "falamos"], correct: 2, explanation: "Second person formal: 'você fala' (you speak)" },
+                { question: "Choose the correct form: 'Tu _____ aqui.'", options: ["moro", "moras", "mora", "moram"], correct: 1, explanation: "Second person informal: 'tu moras' (you live)" },
+                { question: "Choose the correct form: 'Eu _____ a porta.'", options: ["abro", "abres", "abre", "abrem"], correct: 0, explanation: "First person singular: 'eu abro' (I open)" },
+                { question: "Choose the correct form: 'Elas _____ felizes.'", options: ["sou", "é", "somos", "são"], correct: 3, explanation: "Third person plural of 'ser': 'elas são' (they are)" },
+                { question: "Choose the correct form: 'Nós _____ no cinema.'", options: ["vou", "vai", "vamos", "vão"], correct: 2, explanation: "First person plural: 'nós vamos' (we go)" }
+            ],
+            past: [
+                { question: "Choose the correct past tense: 'Eu _____ no parque.'", options: ["jogo", "joguei", "jogava", "jogarei"], correct: 1, explanation: "Preterite: 'joguei' (I played)" },
+                { question: "Choose the correct past tense: 'Ele _____ um carro novo.'", options: ["compra", "comprou", "compraria", "comprará"], correct: 1, explanation: "Preterite: 'comprou' (he bought)" },
+                { question: "Choose the correct past tense: 'Eles _____ para casa.'", options: ["vão", "foram", "vão", "irão"], correct: 1, explanation: "Preterite: 'foram' (they went)" },
+                { question: "Choose the correct past tense: 'Ela _____ o filme.'", options: ["assiste", "assistiu", "assistirá", "assistia"], correct: 1, explanation: "Preterite: 'assistiu' (she watched)" },
+                { question: "Choose the correct past tense: 'Nós _____ a festa.'", options: ["adoramos", "adorámos", "adorávamos", "adoraremos"], correct: 0, explanation: "Preterite: 'adoramos' (we loved)" },
+                { question: "Choose the correct past tense: 'Você _____ à praia?'", options: ["vai", "foi", "irá", "iria"], correct: 1, explanation: "Preterite: 'foi' (you went)" },
+                { question: "Choose the correct past tense: 'Eu _____ em Lisboa.'", options: ["viva", "vivia", "vivi", "viverei"], correct: 2, explanation: "Preterite: 'vivi' (I lived)" },
+                { question: "Choose the correct past tense: 'Elas _____ as lições.'", options: ["aprendem", "aprenderam", "aprendia", "aprenderão"], correct: 1, explanation: "Preterite: 'aprenderam' (they learned)" },
+                { question: "Choose the correct past tense: 'Eu _____ muito cansado.'", options: ["sou", "fui", "era", "seria"], correct: 2, explanation: "Imperfect: 'era' (I was/used to be)" },
+                { question: "Choose the correct past tense: 'Ele _____ lá quando a conheceu.'", options: ["trabalha", "trabalhou", "trabalhava", "trabalhará"], correct: 2, explanation: "Imperfect: 'trabalhava' (he used to work)" }
+            ],
+            future: [
+                { question: "Choose the correct future tense: 'Eu _____ amanhã.'", options: ["vou", "vou ir", "irei", "ia"], correct: 2, explanation: "Future: 'irei' (I will go)" },
+                { question: "Choose the correct future tense: 'Ela _____ na universidade.'", options: ["estuda", "estudará", "estudava", "estudou"], correct: 1, explanation: "Future: 'estudará' (she will study)" },
+                { question: "Choose the correct future tense: 'Nós _____ juntos.'", options: ["viajaremos", "viajamos", "viajávamos", "viajámos"], correct: 0, explanation: "Future: 'viajaremos' (we will travel)" },
+                { question: "Choose the correct future tense: 'Eles _____ a competição.'", options: ["ganham", "ganharam", "ganharão", "ganhava"], correct: 2, explanation: "Future: 'ganharão' (they will win)" },
+                { question: "Choose the correct future tense: 'Você _____ sucesso.'", options: ["terá", "tem", "tinha", "teve"], correct: 0, explanation: "Future: 'terá' (you will have)" },
+                { question: "Choose the correct future tense: 'Eu _____ uma casa grande.'", options: ["compro", "compraria", "comprarei", "comprei"], correct: 2, explanation: "Future: 'comprarei' (I will buy)" },
+                { question: "Choose the correct future tense: 'Ela _____ o trabalho em tempo.'", options: ["termina", "terminou", "terminará", "terminava"], correct: 2, explanation: "Future: 'terminará' (she will finish)" },
+                { question: "Choose the correct future tense: 'Elas _____ ao encontro.'", options: ["vão", "irão", "foram", "iam"], correct: 1, explanation: "Future: 'irão' (they will go)" },
+                { question: "Choose the correct future tense: 'Nós _____ felizes.'", options: ["seremos", "somos", "éramos", "fomos"], correct: 0, explanation: "Future: 'seremos' (we will be)" },
+                { question: "Choose the correct future tense: 'Ele _____ para Portugal.'", options: ["volta", "voltaria", "voltará", "voltava"], correct: 2, explanation: "Future: 'voltará' (he will return)" }
+            ],
+            adjectives: [
+                { question: "Choose the correct adjective: 'A casa é _____.'", options: ["grande", "grandes", "gran", "grando"], correct: 0, explanation: "Feminine singular: 'grande' (big)" },
+                { question: "Choose the correct adjective: 'Os livros são _____.'", options: ["interessante", "interessante", "interessantes", "interessanto"], correct: 2, explanation: "Masculine plural: 'interessantes' (interesting)" },
+                { question: "Choose the correct adjective: 'A menina é _____.'", options: ["bonito", "bonita", "bonito", "bonitó"], correct: 1, explanation: "Feminine singular: 'bonita' (pretty)" },
+                { question: "Choose the correct adjective: 'Os carros são _____.'", options: ["novo", "novos", "nova", "novas"], correct: 1, explanation: "Masculine plural: 'novos' (new)" },
+                { question: "Choose the correct adjective: 'As meninas são _____.'", options: ["inteligente", "inteligente", "inteligentes", "inteliganto"], correct: 2, explanation: "Feminine plural: 'inteligentes' (intelligent)" },
+                { question: "Choose the correct adjective: 'O professor é _____.'", options: ["estrito", "estrita", "estritos", "estritas"], correct: 0, explanation: "Masculine singular: 'estrito' (strict)" },
+                { question: "Choose the correct adjective: 'A aula é _____.'", options: ["difícil", "difícilo", "difícila", "difíciles"], correct: 0, explanation: "Feminine singular: 'difícil' (difficult)" },
+                { question: "Choose the correct adjective: 'Os alunos são _____.'", options: ["divertido", "divertida", "divertidos", "divertidas"], correct: 2, explanation: "Masculine plural: 'divertidos' (fun)" },
+                { question: "Choose the correct adjective: 'A resposta é _____.'", options: ["correto", "correta", "corretos", "corretas"], correct: 1, explanation: "Feminine singular: 'correta' (correct)" },
+                { question: "Choose the correct adjective: 'As comidas são _____.'", options: ["delicioso", "deliciosa", "deliciosos", "deliciosas"], correct: 3, explanation: "Feminine plural: 'deliciosas' (delicious)" }
+            ],
+            pronouns: [
+                { question: "Choose the correct pronoun: '_____ somos amigos.'", options: ["Ele", "Nós", "Elas", "Você"], correct: 1, explanation: "First person plural: 'Nós' (We)" },
+                { question: "Choose the correct pronoun: '_____ é professor.'", options: ["Eles", "Ela", "Nós", "Eu"], correct: 1, explanation: "Third person feminine: 'Ela' (She)" },
+                { question: "Choose the correct pronoun: '_____ estou feliz.'", options: ["Tu", "Eu", "Ele", "Você"], correct: 1, explanation: "First person singular: 'Eu' (I)" },
+                { question: "Choose the correct pronoun: '_____ vão à praia.'", options: ["Ele", "Eu", "Eles", "Tu"], correct: 2, explanation: "Third person plural: 'Eles' (They)" },
+                { question: "Choose the correct pronoun: '_____ falam português?'", options: ["Vocês", "Nós", "Ele", "Eu"], correct: 0, explanation: "Second person plural: 'Vocês' (You all)" },
+                { question: "Choose the correct pronoun: '_____ comes maçã.'", options: ["Tu", "Ele", "Nós", "Eles"], correct: 0, explanation: "Second person informal: 'Tu' (You informal)" },
+                { question: "Choose the correct pronoun: '_____ mora em Lisboa.'", options: ["Vocês", "Eu", "Você", "Eles"], correct: 2, explanation: "Second person formal: 'Você' (You formal)" },
+                { question: "Choose the correct pronoun: '_____ trabalham na fábrica.'", options: ["Eu", "Tu", "Elas", "Você"], correct: 2, explanation: "Third person plural feminine: 'Elas' (They-f)" },
+                { question: "Choose the correct pronoun: '_____ comemos juntos.'", options: ["Nós", "Você", "Eles", "Eu"], correct: 0, explanation: "First person plural: 'Nós' (We)" },
+                { question: "Choose the correct pronoun: '_____ é muito alto.'", options: ["Tu", "Ele", "Nós", "Vocês"], correct: 1, explanation: "Third person masculine: 'Ele' (He)" }
+            ],
+            prepositions: [
+                { question: "Choose the correct preposition: 'O livro está _____ a mesa.'", options: ["em", "de", "para", "com"], correct: 0, explanation: "Location: 'em' (in/on)" },
+                { question: "Choose the correct preposition: 'Eu vou _____ Lisboa.'", options: ["em", "de", "para", "com"], correct: 2, explanation: "Destination: 'para' (to)" },
+                { question: "Choose the correct preposition: 'Este carro é _____ João.'", options: ["em", "de", "para", "com"], correct: 1, explanation: "Possession: 'de' (of)" },
+                { question: "Choose the correct preposition: 'Ela fala _____ seu amigo.'", options: ["em", "de", "para", "com"], correct: 3, explanation: "Accompaniment: 'com' (with)" },
+                { question: "Choose the correct preposition: 'Eles moram _____ Portugal.'", options: ["em", "de", "para", "a"], correct: 0, explanation: "Location: 'em' (in)" },
+                { question: "Choose the correct preposition: 'Este presente é _____ você.'", options: ["em", "de", "para", "com"], correct: 2, explanation: "Destination/Recipient: 'para' (for)" },
+                { question: "Choose the correct preposition: 'A senha _____ o banco é 1234.'", options: ["em", "de", "para", "com"], correct: 1, explanation: "Possession: 'de' (of)" },
+                { question: "Choose the correct preposition: 'Ele trabalha _____ a empresa.'", options: ["em", "de", "para", "com"], correct: 0, explanation: "Location: 'em' (in)" },
+                { question: "Choose the correct preposition: 'Vou ficar _____ casa esta noite.'", options: ["em", "de", "a", "com"], correct: 0, explanation: "Location: 'em' (at)" },
+                { question: "Choose the correct preposition: 'Ele veio _____ carro.'", options: ["em", "de", "para", "com"], correct: 0, explanation: "Transportation: 'em' (by)" }
+            ]
+        };
+
+        let currentAudioCategory = null;
+        let currentAudioIndex = 0;
         let currentTopic = null;
-        let answeredQuestions = {};
+        let recordingMediaRecorder = null;
+        let recordingChunks = [];
 
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => {
@@ -783,12 +811,126 @@
             document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
         }
 
+        // AUDIO FUNCTIONS
+        function loadAudioCategory(category) {
+            if (!category) return;
+
+            currentAudioCategory = category;
+            currentAudioIndex = 0;
+            
+            const exercises = audioExercises[category] || [];
+            const audioContent = document.getElementById('audio-content');
+
+            if (exercises.length === 0) {
+                audioContent.innerHTML = '<p class="placeholder">No exercises available for this category.</p>';
+                return;
+            }
+
+            document.getElementById('exercise-container').classList.remove('hidden');
+            loadAudioExercise(0);
+        }
+
+        function loadAudioExercise(index) {
+            const exercises = audioExercises[currentAudioCategory];
+            
+            if (index < 0 || index >= exercises.length) {
+                return;
+            }
+
+            currentAudioIndex = index;
+            const exercise = exercises[index];
+
+            document.getElementById('audio-title').textContent = `Exercise ${index + 1}: Listen & Repeat`;
+            document.getElementById('portuguese-text').textContent = exercise.portuguese;
+            document.getElementById('english-translation').textContent = exercise.english;
+            document.getElementById('audio-progress').textContent = `${index + 1} / ${exercises.length}`;
+
+            document.getElementById('prev-audio-btn').disabled = index === 0;
+            document.getElementById('next-audio-btn').disabled = index === exercises.length - 1;
+
+            resetRecording();
+        }
+
+        function speakAudio(speed) {
+            const exercises = audioExercises[currentAudioCategory];
+            const exercise = exercises[currentAudioIndex];
+            
+            const utterance = new SpeechSynthesisUtterance(exercise.portuguese);
+            utterance.lang = 'pt-PT';
+            utterance.rate = speed === 'slow' ? 0.7 : 1;
+            
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function previousAudio() {
+            if (currentAudioIndex > 0) {
+                loadAudioExercise(currentAudioIndex - 1);
+            }
+        }
+
+        function nextAudio() {
+            const exercises = audioExercises[currentAudioCategory];
+            if (currentAudioIndex < exercises.length - 1) {
+                loadAudioExercise(currentAudioIndex + 1);
+            }
+        }
+
+        async function startRecording() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                recordingMediaRecorder = new MediaRecorder(stream);
+                recordingChunks = [];
+
+                recordingMediaRecorder.ondataavailable = (event) => {
+                    recordingChunks.push(event.data);
+                };
+
+                recordingMediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(recordingChunks, { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    
+                    document.getElementById('playback-audio').src = audioUrl;
+                    showRecordingFeedback('✓ Recording saved! Click play to listen to your recording.');
+                };
+
+                recordingMediaRecorder.start();
+                
+                document.getElementById('record-start-btn').style.display = 'none';
+                document.getElementById('record-stop-btn').style.display = 'flex';
+            } catch (error) {
+                showRecordingFeedback('❌ Error accessing microphone. Please check permissions.', true);
+            }
+        }
+
+        function stopRecording() {
+            if (recordingMediaRecorder) {
+                recordingMediaRecorder.stop();
+                recordingMediaRecorder.stream.getTracks().forEach(track => track.stop());
+                
+                document.getElementById('record-start-btn').style.display = 'flex';
+                document.getElementById('record-stop-btn').style.display = 'none';
+            }
+        }
+
+        function resetRecording() {
+            document.getElementById('playback-audio').src = '';
+            document.getElementById('recording-feedback').innerHTML = '';
+            document.getElementById('record-start-btn').style.display = 'flex';
+            document.getElementById('record-stop-btn').style.display = 'none';
+        }
+
+        function showRecordingFeedback(message, isError = false) {
+            const feedback = document.getElementById('recording-feedback');
+            feedback.textContent = message;
+            feedback.className = `feedback ${isError ? 'error' : 'success'}`;
+        }
+
+        // GRAMMAR FUNCTIONS
         function loadGrammarTopic(topic) {
             if (!topic) return;
 
             currentTopic = topic;
-            answeredQuestions[topic] = answeredQuestions[topic] || {};
-            
             const questions = grammarTopics[topic] || [];
             const grammarContent = document.getElementById('grammar-content');
 
@@ -825,7 +967,6 @@
             const questionIndex = parseInt(button.getAttribute('data-question'));
             const selectedIndex = parseInt(button.getAttribute('data-option'));
             const correctIndex = parseInt(button.getAttribute('data-correct'));
-            const explanation = button.getAttribute('data-explanation');
             
             const optionsContainer = document.getElementById(`options-${questionIndex}`);
             const allButtons = optionsContainer.querySelectorAll('button');
@@ -851,11 +992,6 @@
             }
             
             document.getElementById(`explanation-${questionIndex}`).style.display = 'block';
-            
-            // Track answered questions
-            if (currentTopic) {
-                answeredQuestions[currentTopic][questionIndex] = selectedIndex === correctIndex;
-            }
         }
 
         document.querySelectorAll('.nav-tab').forEach(tab => {
